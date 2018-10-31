@@ -1,0 +1,8 @@
+Calendar Grid:
+	- Bind grid to resize with window
+	- When a box is double-clicked, open a popup window for the user to enter information
+		- Example: Title of event, beginning + end times, description
+	- When a box is single-clicked, give a preview in right-side tab
+	- Offline viewing
+	- Extend Rectangle class
+		- When drawn, displays number automatically
