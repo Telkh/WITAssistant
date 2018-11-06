@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -20,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+// TODO: Program crashes when user clicks out before entering event
 
 public class Main extends Application {
 	
@@ -39,36 +41,14 @@ public class Main extends Application {
 		primaryStage.setTitle("WITAssistant");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		cal.setOnMouseClicked(e -> {
-			System.out.println("X: " + e.getX() + " Y: " + e.getY());
-			
-		});
-		
 	}
 	
 	public void drawCalendar() {
 		int counter = 0;
-		final int MAX_ROW = 5;
+		final int MAX_ROW = 10;
 		final int MAX_SIZE = 34;
 		int rowNum = -1;
 		int colNum = 0;
-		/*for(int i = 0; i < 7; i++) {
-			for(int j = 0; j < 5; j++) {
-				counter++;
-				Label dateNum = new Label(Integer.toString(counter));
-				
-				
-				Rectangle dayBox = new Rectangle(0, 0, 100, 100);
-				day	Box.setFill(Color.WHITE);
-				dayBox.setStroke(Color.BLACK);
-				
-				StackPane layout = new StackPane();
-				layout.getChildren().addAll(dayBox,dateNum);
-				
-				cal.setConstraints(layout,j,i);
-				cal.getChildren().addAll(layout);
-			}
-		}*/
 		while((counter) < MAX_SIZE) {
 			if(rowNum == MAX_ROW) {
 				rowNum = 0;
@@ -78,21 +58,12 @@ public class Main extends Application {
 				rowNum++;
 			}
 			counter++;
-			
-			Label dateNum = new Label(Integer.toString(counter));
-			dateNum.setAlignment(Pos.CENTER);
-			Rectangle dayBox = new Rectangle(0, 0, 100, 100);
-			dayBox.setFill(Color.WHITE);
-			dayBox.setStroke(Color.BLACK);
-			
-			VBox layout = new VBox(2);
-			layout.setPrefWidth(dayBox.getWidth());
-			
-			layout.getChildren().addAll(dateNum, dayBox);
-			
-			cal.setConstraints(layout,rowNum,colNum);
-			cal.getChildren().addAll(layout);
-			
+			DayBox dayBox = new DayBox(150,200,counter);
+			dayBox.setOnMouseReleased(e -> {
+				dayBox.addEvent();
+		});
+			cal.setConstraints(dayBox,rowNum,colNum);
+			cal.getChildren().addAll(dayBox);
 		}
 	}
 	
