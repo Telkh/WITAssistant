@@ -50,7 +50,6 @@ public class EventFormController {
 			
 			
 			
-			
 			setEvent();
 			
 			System.out.println("Closing");
