@@ -9,8 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
+
 import javafx.stage.Stage;
+
+
 
 public class EventFormController {
 	@FXML private Button btnSubmit;
@@ -18,21 +20,26 @@ public class EventFormController {
 	@FXML private TextField tfTitle;
 	@FXML private TextField tfDesc;
 	@FXML private TextField tfStartTime;
-	// This is a test comment jhwsjghsc
+	@FXML private TextField tfEndTime;
+	private Stage stage = new Stage();
 	private Event event;
 	
 	public void initialize() {
-		
+		event = new Event();
+		System.out.println("EventFromController Initialized");
 	}
-	//jesus commnet
+	
 	public void setEvent() {
+		
+		
+		
 		
 	}
 	
 	public Event getEvent() {
-		Stage stage = new Stage();
+		
 		Parent root;
-		Event newEvent = new Event("","",0,0);
+		
 		try {
 			root = FXMLLoader.load(getClass().getResource("EventForm.fxml"));
 			Scene scene = new Scene(root,300,300);
@@ -40,13 +47,26 @@ public class EventFormController {
 			stage.setWidth(400);
 			stage.setHeight(300);
 			stage.showAndWait();
-			setEvent();
-			return newEvent;
 			
+			event.setEventDesc(tfDesc.getText());
+			event.setEventTitle(tfTitle.getText());
+			event.setStartTime(Integer.parseInt(tfStartTime.getText()));
+			event.setEndTime(Integer.parseInt(tfEndTime.getText()));
+			
+			System.out.println("Closing");
+			if(event == null) {
+				System.out.println(true);
+			}
+			return event;
 		} catch (IOException e) {
 			e.printStackTrace();
-			return newEvent;
+			if(event == null) {
+				System.out.println(true);
+			}
+			return event;
 		}
+		
+		
 	}
 	
 	

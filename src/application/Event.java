@@ -13,24 +13,46 @@ public class Event {
 		endTime = end;
 	}
 	
-	public String getTitle() {
+	public Event() {
+		eventTitle = "";
+		eventDesc = "";
+		startTime = 0;
+		endTime = 0;
+	}
+	
+	public String getEventTitle() {
 		return eventTitle;
 	}
-	
-	public String getDescription() {
+
+
+
+	public void setEventTitle(String eventTitle) {
+		this.eventTitle = eventTitle;
+	}
+
+
+
+	public String getEventDesc() {
 		return eventDesc;
 	}
-	
-	
-	
-	public int getStartTime() {
-		return startTime;
+
+
+
+	public void setEventDesc(String eventDesc) {
+		this.eventDesc = eventDesc;
 	}
-	
-	public int getEndTime() {
-		return endTime;
+
+
+
+	public void setStartTime(int startTime) {
+		this.startTime = startTime;
 	}
-	
+
+
+
+	public void setEndTime(int endTime) {
+		this.endTime = endTime;
+	}
 	
 	public String toString() {
 		String output = ("Title: " + eventTitle + " Name: " + eventDesc + " Start Time: " + startTime + " End Time: " + endTime);
