@@ -120,8 +120,9 @@ public class AnchorPaneController {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
-					Event temp = EFC.getEvent();
-					EFC.initialize();
+					//Event temp = EFC.getEvent();
+					System.out.println(EFC.getEvent());
+					//System.out.println(temp);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
