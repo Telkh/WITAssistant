@@ -80,9 +80,16 @@ public class AnchorPaneController {
 		}
 		currentDateLabel.setText(months[monthValue - 1] + " " + yearValue);
 		cal.getChildren().clear();
+		if(EventTime.isLeap(yearValue)) {
+             numDays[1] = 29;
+		 } else {
+			 numDays[1] = 28;
+		 }
+		setLeapYear();
 		drawCalendar(numDays[monthValue - 1]);
 	}
 	
+		
 	public void previousMonth() {
 		if(monthValue == 1) {
 			monthValue = 12;
@@ -93,7 +100,16 @@ public class AnchorPaneController {
 		}
 		currentDateLabel.setText(months[monthValue - 1] + " " + yearValue);
 		cal.getChildren().clear();
+		setLeapYear();
 		drawCalendar(numDays[monthValue - 1]);
+	}
+	
+	public void setLeapYear() {
+		if(EventTime.isLeap(yearValue)) {
+            numDays[1] = 29;
+		 } else {
+			 numDays[1] = 28;
+		 }
 	}
 	
 	public void setContextMenu() {

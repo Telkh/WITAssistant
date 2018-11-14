@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -14,6 +15,10 @@ import javafx.stage.Stage;
 public class EventFormController {
 	@FXML private Button btnSubmit;
 	@FXML private AnchorPane anchorPane;
+	@FXML private TextField tfTitle;
+	@FXML private TextField tfDesc;
+	@FXML private TextField tfStartTime;
+	
 	private Event event;
 	
 	public void initialize() {
@@ -21,7 +26,7 @@ public class EventFormController {
 	}
 	
 	public void setEvent() {
-		System.out.println("Test");
+		
 	}
 	
 	public Event getEvent() {
