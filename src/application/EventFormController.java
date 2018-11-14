@@ -28,7 +28,7 @@ public class EventFormController {
 		event = new Event();
 		System.out.println("EventFromController Initialized");
 	}
-	
+
 	public void setEvent() {
 		event.setEventDesc(tfDesc.getText());
 		event.setEventTitle(tfTitle.getText());

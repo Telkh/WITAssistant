@@ -18,9 +18,9 @@ public class Event {
 	}
 	
 	public Event() {
-		eventTitle = "";
+		eventTitle = ""; //2
 		eventDesc = "";
-		eventDate = "00/00/0000";
+		eventDate = "00/00/0000"; //1
 		startTime = 0;
 		endTime = 0;
 	}

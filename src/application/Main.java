@@ -52,5 +52,8 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+//		GPA g = new GPA();
+//		g.generateValue();
+//		g.toString();
 	}
 }
