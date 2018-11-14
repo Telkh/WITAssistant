@@ -35,7 +35,7 @@ public class EventFormController {
 		event.setStartTime(Integer.parseInt(tfStartTime.getText()));
 		event.setEndTime(Integer.parseInt(tfEndTime.getText()));
 		System.out.println(event);
-	}
+	}//ugsdujwg
 
 	public Event getEvent() {
 		Parent root;
