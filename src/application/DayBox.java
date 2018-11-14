@@ -23,7 +23,7 @@ public class DayBox extends Group {
 	private int boxLength;
 	private Label dayLabel;
 	private Rectangle calBox;
-	private int labelYPos = 25;
+	private int labelYPos = 0;
 	public DayBox(int length, int width, int day) {
 		dayNum = day;
 		boxWidth = width;
@@ -50,4 +50,5 @@ public class DayBox extends Group {
 		getChildren().add(eventLabel);
 		System.out.println("Exit");
 	}
+	
 }
