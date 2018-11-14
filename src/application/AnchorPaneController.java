@@ -144,6 +144,34 @@ public class AnchorPaneController {
 		drawCalendar(numDays[monthValue - 1]);
 		setContextMenu();
 	}
+	public static boolean isLeap(int year) {
+		if (year%4 == 0) {
+			if (year%100 == 0) {
+				if(year%400 == 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				//leap
+				return true;
+			}
+		} else {
+			//not leap
+			return false;
+		}
+	}
+	
+	public static int getDays(String monthName, int year) {
+		String [] month = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+		int [] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		if(isLeap(year) == true) {
+			days[1] = 29;
+		}
+	
+		//k
+		return 0;
+	}
 }
 
 
