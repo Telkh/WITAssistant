@@ -18,7 +18,7 @@ public class EventFormController {
 	@FXML private TextField tfTitle;
 	@FXML private TextField tfDesc;
 	@FXML private TextField tfStartTime;
-	
+	// This is a test comment
 	private Event event;
 	
 	public void initialize() {
