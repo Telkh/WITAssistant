@@ -2,7 +2,7 @@ package application;
 
 public class GPA {
 //gp]a Class
-	final static String [] grade = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"};
+	final static String [] grade = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"}; //grades
 	static double [] weight = new double[grade.length];
 	
 	public static void generateValue() {
