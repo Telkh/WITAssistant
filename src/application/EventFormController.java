@@ -30,14 +30,14 @@ public class EventFormController {
 	}
 	
 	public void setEvent() {
-		
-		
-		
-		
+		event.setEventDesc(tfDesc.getText());
+		event.setEventTitle(tfTitle.getText());
+		event.setStartTime(Integer.parseInt(tfStartTime.getText()));
+		event.setEndTime(Integer.parseInt(tfEndTime.getText()));
+		System.out.println(event);
 	}
-	
+
 	public Event getEvent() {
-		
 		Parent root;
 		
 		try {
@@ -48,10 +48,10 @@ public class EventFormController {
 			stage.setHeight(300);
 			stage.showAndWait();
 			
-			event.setEventDesc(tfDesc.getText());
-			event.setEventTitle(tfTitle.getText());
-			event.setStartTime(Integer.parseInt(tfStartTime.getText()));
-			event.setEndTime(Integer.parseInt(tfEndTime.getText()));
+			
+			
+			
+			setEvent();
 			
 			System.out.println("Closing");
 			if(event == null) {

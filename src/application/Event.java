@@ -1,5 +1,6 @@
 package application;
 
+
 public class Event {
 	private String eventTitle;
 	private String eventDesc;
@@ -9,10 +10,10 @@ public class Event {
 	
 	
 	public Event(String title, String name, String date, int start, int end) {
+		eventDate = date;
 		eventTitle = title;
 		eventDesc = name;
 		startTime = start;
-		eventDate = date;
 		endTime = end;
 	}
 	
@@ -51,8 +52,6 @@ public class Event {
 	public void setEventDesc(String eventDesc) {
 		this.eventDesc = eventDesc;
 	}
-
-
 
 	public void setStartTime(int startTime) {
 		this.startTime = startTime;
