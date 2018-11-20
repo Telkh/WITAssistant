@@ -26,21 +26,20 @@ import javafx.scene.text.Text;
 
 
 public class Main extends Application {
-	
 	@FXML private GridPane cal;
 	@FXML private Button btnNext;
 	@FXML private HBox lowerSection;
 	@FXML private BorderPane bPane;
 	private Rectangle [] [] recGrid = new Rectangle [7][5];
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		
 		Parent root  = FXMLLoader.load(getClass().getResource("Main.fxml"));
-		
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("WITAssistant");
 		primaryStage.setScene(scene);
-	
+		
 		primaryStage.setWidth(1800); // TODO: Set min width and height based on box dimensions
 		primaryStage.setHeight(1100);
 		//primaryStage.setResizable(false);
