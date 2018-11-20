@@ -38,7 +38,7 @@ public class AnchorPaneController {
 	@FXML AnchorPane rightSection;
 	@FXML TextFlow tfOverview;
 	@FXML Label currentDateLabel;
-
+	// Testing
 	private ContextMenu contextMenu;
 	private MenuItem itemEdit;
 	private Event currentEvent;
