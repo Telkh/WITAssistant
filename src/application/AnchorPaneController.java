@@ -28,17 +28,14 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-// TODO: Ask about controller class: Should I have methods for each component (Buttons, etc.) in one controller class?
-
 public class AnchorPaneController {
 	@FXML GridPane cal;
-	
 	@FXML SplitPane splitPane;
 	@FXML AnchorPane leftSection;
 	@FXML AnchorPane rightSection;
 	@FXML TextFlow tfOverview;
 	@FXML Label currentDateLabel;
-	// Testing
+	
 	private ContextMenu contextMenu;
 	private MenuItem itemEdit;
 	private Event currentEvent;
@@ -93,7 +90,6 @@ public class AnchorPaneController {
 			}
 		}
 		else {
-			//System.out.println("No events on " + EventTime.getDate());
 			Text emptyMessage = new Text("There are no events on " + EventTime.getDate());
 			tfOverview.getChildren().add(emptyMessage);
 		}

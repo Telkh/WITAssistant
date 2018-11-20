@@ -40,11 +40,9 @@ public class Main extends Application {
 		primaryStage.setTitle("WITAssistant");
 		primaryStage.setScene(scene);
 		
-		primaryStage.setWidth(1800); // TODO: Set min width and height based on box dimensions
+		primaryStage.setWidth(1800);
 		primaryStage.setHeight(1100);
-		//primaryStage.setResizable(false);
 		primaryStage.heightProperty().addListener((obs, oldval, newval) -> {
-			//System.out.println(newval);
 		});
 		primaryStage.show();	
 	}

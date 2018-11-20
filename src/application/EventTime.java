@@ -69,7 +69,6 @@ public class EventTime implements Comparable {
 		currentMonth = LocalDateTime.now().getMonthValue();
 		currentYear = LocalDateTime.now().getYear();
 		currentDay = 1;
-		//currentDate = getDate();
 	}
 
 	private static boolean isLeap(int year) {
@@ -117,7 +116,6 @@ public class EventTime implements Comparable {
 	
 	@Override
 	public int compareTo(Object arg0) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	
