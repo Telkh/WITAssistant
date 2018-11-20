@@ -24,8 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-// TODO: Program crashes when user clicks out before entering event
-// TODO: Create separate functions for drawing lower section, right-side panel, etc.
+
 public class Main extends Application {
 	
 	@FXML private GridPane cal;
@@ -37,16 +36,18 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		
 		Parent root  = FXMLLoader.load(getClass().getResource("Main.fxml"));
+		
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("WITAssistant");
 		primaryStage.setScene(scene);
 	
 		primaryStage.setWidth(1800); // TODO: Set min width and height based on box dimensions
-		primaryStage.setHeight(900);
-		primaryStage.setResizable(false);
-		primaryStage.widthProperty().addListener((obs, oldval, newval) -> {
+		primaryStage.setHeight(1100);
+		//primaryStage.setResizable(false);
+		primaryStage.heightProperty().addListener((obs, oldval, newval) -> {
+			//System.out.println(newval);
 		});
-		primaryStage.show();
+		primaryStage.show();	
 	}
 		
 

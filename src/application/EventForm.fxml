@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EventFormController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EventForm">
    <children>
       <GridPane alignment="CENTER" hgap="10.0" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <columnConstraints>
@@ -25,7 +25,7 @@
          </rowConstraints>
          <children>
             <Label fx:id="lblTitle" text="Title" GridPane.halignment="CENTER" />
-            <TextField fx:id="tfTitle" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <TextField fx:id="tfTitle" promptText="Enter Title" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <Label fx:id="lblDesc" text="Description" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <Label fx:id="lblStartTime" text="Start Time" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label fx:id="lblEndTime" text="End Time" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
@@ -47,7 +47,7 @@
       </HBox>
       <HBox fx:id="lowerSection" alignment="CENTER" prefHeight="50.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="btnSubmit" onAction="#setEvent" text="Submit" />
+            <Button fx:id="btnSubmit" text="Submit" />
          </children>
       </HBox>
    </children>

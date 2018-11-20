@@ -1,7 +1,9 @@
 package application;
 
+import java.awt.Font;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,38 +19,40 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 // TODO: Ask about controller class: Should I have methods for each component (Buttons, etc.) in one controller class?
 
 public class AnchorPaneController {
 	@FXML GridPane cal;
-	@FXML HBox topSection;
+	
 	@FXML SplitPane splitPane;
 	@FXML AnchorPane leftSection;
+	@FXML AnchorPane rightSection;
+	@FXML TextFlow tfOverview;
 	@FXML Label currentDateLabel;
-	private String [] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-	private int [] numDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	private int monthValue;
-	private int yearValue;
+
 	private ContextMenu contextMenu;
 	private MenuItem itemEdit;
 	private Event currentEvent;
-	
-	public void drawCalendar(int numDays) {
+
+	public void drawCalendar() {
+		cal.getChildren().clear();
 		int counter = 0;
-		final int MAX_ROW = 10; //TODO: Make max-row 7
-		final int MAX_SIZE = numDays;
+		final int MAX_ROW = 6;
 		int rowNum = -1;
 		int colNum = 0;
-		int length = 100;
+		int length = 200;
 		int width = 200;
 		int paddingValue = 10;
-		while((counter) < MAX_SIZE) {
+		while((counter) < EventTime.getNumDays()) {
 			if(rowNum == MAX_ROW) {
 				rowNum = 0;
 				colNum++;
@@ -58,121 +62,99 @@ public class AnchorPaneController {
 			}
 			counter++;
 			DayBox dayBox = new DayBox(length,width,counter);
-			dayBox.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>(){
+			dayBox.setOnMouseClicked(new EventHandler<MouseEvent>(){
 				@Override
-				public void handle(ContextMenuEvent event) {
-					contextMenu.show(dayBox,event.getScreenX(), event.getScreenY());
+				public void handle(MouseEvent event) {
+					EventTime.setDay(dayBox.getDay()); // Set current day to day selected by user
+					if(event.getButton().toString().equals("SECONDARY")) {
+						contextMenu.show(dayBox,event.getScreenX(), event.getScreenY());
+					}
+					else {
+						drawDayOverview();
+					}
 				}
 			});
+			
+			// Draw labels on DayBox if events exist on that date
+			if(EventDB.containsAtDate(EventTime.getDate())) {
+				dayBox.drawEvents(EventDB.getListAt(EventTime.getDate()));
+			}
 			GridPane.setConstraints(dayBox,rowNum,colNum);
 			cal.getChildren().addAll(dayBox);
 		}
-		
 	}
 	
-	public void nextMonth() {
-		if(monthValue == 12) {
-			monthValue = 1;
-			yearValue++;
-		} 
-		else {
-			monthValue++;
-		}
-		currentDateLabel.setText(months[monthValue - 1] + " " + yearValue);
-		cal.getChildren().clear();
-		if(EventTime.isLeap(yearValue)) {
-             numDays[1] = 29;
-		 } else {
-			 numDays[1] = 28;
-		 }
-		setLeapYear();
-		drawCalendar(numDays[monthValue - 1]);
-	}
-	
-		
-	public void previousMonth() {
-		if(monthValue == 1) {
-			monthValue = 12;
-			yearValue--;
+	public void drawDayOverview() {
+		tfOverview.getChildren().clear(); // Reset TextFlow before displaying new text
+		if(EventDB.containsAtDate(EventTime.getDate())) {
+			ArrayList <Event> eventList = EventDB.getListAt(EventTime.getDate());
+			for(int i = 0; i < eventList.size(); i++) {
+				drawEventInformation(eventList.get(i));
+			}
 		}
 		else {
-			monthValue--;
+			//System.out.println("No events on " + EventTime.getDate());
+			Text emptyMessage = new Text("There are no events on " + EventTime.getDate());
+			tfOverview.getChildren().add(emptyMessage);
 		}
-		currentDateLabel.setText(months[monthValue - 1] + " " + yearValue);
-		cal.getChildren().clear();
-		setLeapYear();
-		drawCalendar(numDays[monthValue - 1]);
 	}
 	
-	public void setLeapYear() {
-		if(EventTime.isLeap(yearValue)) {
-            numDays[1] = 29;
-		 } else {
-			 numDays[1] = 28;
-		 }
+	public void drawEventInformation(Event event) {
+		Text title = new Text("\n" + event.getEventTitle());
+		title.setStyle("-fx-font-weight: bold");
+		Text desc = new Text("\n" + event.getEventDesc());
+		tfOverview.getChildren().addAll(title,desc);
 	}
+	
+	
+	
+	public void nextButtonEvent() {
+		EventTime.nextMonth();
+		drawCalendar();
+		setDateLabel();
+	}
+	
+	public void previousButtonEvent() {
+		EventTime.previousMonth();
+		drawCalendar();
+		setDateLabel();
+	}
+	
+	public void setDateLabel() {
+		currentDateLabel.setText(EventTime.getMonthName() + " " + EventTime.getYear());
+	}
+
 	
 	public void setContextMenu() {
 		contextMenu = new ContextMenu();
 		itemEdit = new MenuItem("Edit");
-		EventFormController EFC = new EventFormController();
+		EventForm eventForm = new EventForm();
 		itemEdit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
-				try {
-					//Event temp = EFC.getEvent();
-					System.out.println(EFC.getEvent());
-					//System.out.println(temp);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			public void handle(ActionEvent event) { // TODO: Refresh calendar here
+				eventForm.drawForm();
+				EventDB.addToEventDB(eventForm.getEvent(), EventTime.getDate());
+				drawCalendar();
 			}
 		});
 		contextMenu.getItems().add(itemEdit);
 	}
 	
-	public Stage showEventForm(Event event) {
-		return null;	
-	}
-	
 	public void initialize() {
-		monthValue = LocalDateTime.now().getMonthValue();
-		yearValue = LocalDateTime.now().getYear();
-		currentDateLabel.setText(months[monthValue - 1] + " " + yearValue);
-		leftSection.setMaxWidth(1100);
-		leftSection.minWidthProperty().bind(splitPane.widthProperty().multiply(.685));
-		drawCalendar(numDays[monthValue - 1]);
+		EventTime.initializeDate();
+		int height = 1025;
+		int width = 1425;
+		cal.setMinSize(width, height);
+		cal.setMaxSize(width, height);
+		leftSection.setMinSize(cal.getMaxWidth(), cal.getMaxHeight());
+		leftSection.setMaxSize(cal.getMaxWidth(), cal.getMaxHeight());
+		currentDateLabel.setText(EventTime.getMonthName() + " " + EventTime.getYear());
+		drawCalendar();
 		setContextMenu();
 	}
-	public static boolean isLeap(int year) {
-		if (year%4 == 0) {
-			if (year%100 == 0) {
-				if(year%400 == 0) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				//leap
-				return true;
-			}
-		} else {
-			//not leap
-			return false;
-		}
-	}
 	
-	public static int getDays(String monthName, int year) {
-		String [] month = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-		int [] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-		if(isLeap(year) == true) {
-			days[1] = 29;
-		}
 	
-		//k
-		return 0;
-	}
+	
 }
 
 
