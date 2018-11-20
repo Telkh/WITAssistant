@@ -31,7 +31,7 @@ public class Main extends Application {
 	@FXML private HBox lowerSection;
 	@FXML private BorderPane bPane;
 	private Rectangle [] [] recGrid = new Rectangle [7][5];
-	
+	// Test
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		
