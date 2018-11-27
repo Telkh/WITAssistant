@@ -78,7 +78,7 @@ public class AnchorPaneController {
 				rightSection.getChildren().clear();
 				EventTime.setDay(dayBox.getDay()); // Set current day to day selected by user
 				System.out.println(EventTime.getDate());
-				if(dayBox.isInImageBounds(event.getX(), event.getY())) {
+				if(dayBox.isInPlusBounds(event.getX(), event.getY())) {
 					try {
 						contextPanel = fxmlLoader.load(getClass().getResource("EventForm.fxml"));
 						contextPanel.setPrefWidth(rightSection.getWidth());
@@ -155,10 +155,20 @@ public class AnchorPaneController {
 	
 	public void initialize() {
 		//contextPanel.layoutXProperty().bind(rightSection.layoutXProperty());
-		contextPanel.setMinSize(0, 0);
+
 		rightSection.widthProperty().addListener((obs, oldval, newval) -> {
-			//System.out.println("Testing" + newval.doubleValue());
 			contextPanel.setPrefWidth(newval.doubleValue());
+		});
+		
+		leftSection.setOnMouseClicked(e -> {
+			/*rightSection.getChildren().clear();
+			try {
+				contextPanel = fxmlLoader.load(getClass().getResource("Assistant.fxml"));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}*/
+			System.out.println("Clicked");
 		});
 		splitPane.setDividerPosition(0, .75);
 		

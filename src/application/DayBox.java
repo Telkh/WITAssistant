@@ -28,6 +28,7 @@ public class DayBox extends Group {
 	
 	private int dayNum = 0;
 	private ImageView plusImage;
+	private ImageView minusImage;
 	private Label dayLabel;
 	private Rectangle calBox;
 	private int labelYPos = 0;
@@ -41,9 +42,16 @@ public class DayBox extends Group {
 		widthProperty = calBox.widthProperty();
 		heightProperty = calBox.heightProperty();
 		plusImage = new ImageView();
+		minusImage = new ImageView();
 		plusImage.setImage(new Image("application\\PlusIcon.png"));
+		plusImage.setImage(new Image("application\\MinusIcon.png"));
+	
 		plusImage.setFitWidth(30);
 		plusImage.setFitHeight(30);
+		
+		minusImage.setFitWidth(30);
+		minusImage.setFitHeight(30);
+		
 		deselectDayBox();
 		calBox.setStroke(Color.GRAY);
 		calBox.setStrokeWidth(.2);
@@ -113,12 +121,19 @@ public class DayBox extends Group {
 		
 	}
 	
-	public boolean isInImageBounds(double X, double Y) { // TODO: Ask if there is better implementation possible (Call add event from within daybox)
+	public boolean isInPlusBounds(double X, double Y) { // TODO: Ask if there is better implementation possible (Call add event from within daybox)
 		if(plusImage.getBoundsInParent().contains(X, Y)) {
 			return true;
 		}
 		return false;
 	}
+	
+	public boolean isInMinusBounds(double x, double y) {
+		
+		return false;
+	}
+	
+	
 	
 	public void selectDayBox() {
 		plusImage.setVisible(true);
