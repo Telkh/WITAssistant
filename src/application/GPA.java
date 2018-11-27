@@ -31,7 +31,7 @@ public class GPA {
 	
 	 public String getCourse(){
 		 return course;
-	 }
+	 }//
 	 
 	
 	public String getEarnedGrade() {
