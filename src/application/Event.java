@@ -5,11 +5,11 @@ public class Event {
 	private String eventTitle;
 	private String eventDesc;
 	private String eventDate;
-	private String startTime;
-	private String endTime;
+	private EventTime startTime;
+	private EventTime endTime;
 	private boolean isAllDay;
 	
-	public Event(String title, String name, String date, String start, String end) {
+	public Event(String title, String name, String date, EventTime start, EventTime end) {
 		eventDate = date;
 		eventTitle = title;
 		eventDesc = name;
@@ -22,8 +22,8 @@ public class Event {
 		eventTitle = ""; //2
 		eventDesc = "";
 		eventDate = "00/00/0000"; //1
-		startTime = "";
-		endTime = "";
+		startTime = new EventTime(0,0);
+		endTime = new EventTime(0,0);
 	}
 	
 	public String getEventTitle() {
@@ -50,19 +50,19 @@ public class Event {
 		this.eventDate = eventDate;
 	}
 
-	public String getStartTime() {
+	public EventTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(String startTime) {
+	public void setStartTime(EventTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public String getEndTime() {
+	public EventTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(String endTime) {
+	public void setEndTime(EventTime endTime) {
 		this.endTime = endTime;
 	}
 

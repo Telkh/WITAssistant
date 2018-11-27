@@ -40,9 +40,15 @@ public class Main extends Application {
 		primaryStage.setTitle("WITAssistant");
 		primaryStage.setScene(scene);
 		
-		primaryStage.setWidth(1800);
-		primaryStage.setHeight(1100);
+		primaryStage.setWidth(1500);
+		primaryStage.setHeight(1000);
+		
+		
+		primaryStage.setMinWidth(750);
+		primaryStage.setMinHeight(500);
+		
 		primaryStage.heightProperty().addListener((obs, oldval, newval) -> {
+			
 		});
 		primaryStage.show();	
 	}

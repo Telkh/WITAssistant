@@ -15,8 +15,11 @@ public class EventDB {
 		else {
 			ArrayList<Event> eventList = new ArrayList<Event>();
 			eventList.add(event);
+			
 			eventMap.put(keyValue, eventList);
+			System.out.println("Received event: " + event);
 		}
+		
 	}
 	
 	public static boolean containsAtDate(String keyValue) {
@@ -34,7 +37,6 @@ public class EventDB {
 	private void addToCSV() {
 		
 	}
-	
 	
 	public static ArrayList<Event> getListAt(String keyValue){
 		return eventMap.get(keyValue);
