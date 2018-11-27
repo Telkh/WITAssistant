@@ -1,13 +1,14 @@
-package application;
+package gpaCalculator;
 
 public class GPA {
 	private final String [] grade = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"}; //grades
 	private double [] weight = new double[grade.length]; //weight of letter grades
+	
 	private String course;
 	private String earnedGrade;
 	private int credits;
 	
-	 GPA(String course, String earnedGrade, int credits) {
+	 public GPA(String course, String earnedGrade, int credits) {
 		 generateValue();
 		 this.course = course;
 		 this.earnedGrade = earnedGrade;
@@ -15,9 +16,9 @@ public class GPA {
 		 
 	 }
 	 
-	 GPA(){
-			generateValue(); 
-		 }
+	public GPA() {
+		generateValue();
+	}
 		 
 	 
 	 public int getCredits() {
@@ -31,7 +32,7 @@ public class GPA {
 	
 	 public String getCourse(){
 		 return course;
-	 }//
+	 }
 	 
 	
 	public String getEarnedGrade() {
@@ -75,10 +76,10 @@ public class GPA {
 		return weight[i];
 	}
 	
-	public String toString() {
-		System.out.printf("The grade for %s is %s with = weight %f, points %f", getWeight("A+"), getEarned(4,  "A+"));
-		
-		return "";
-	}
+//	public String toString() {
+//		System.out.printf("The grade for %s is %s with = weight %f, points %f", getWeight("A+"), getEarned(4,  "A+"));
+//		
+//		return "";
+//	}
 	
 }
