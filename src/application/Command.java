@@ -11,7 +11,7 @@ public class Command {
 		this.hmap = new HashMap<String, Runnable>() {
 			{
 			    System.out.println("test2");
-			}
+			}//
 		};
 	}
 }
