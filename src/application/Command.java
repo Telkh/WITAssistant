@@ -10,8 +10,8 @@ public class Command {
 	public Command() {
 		this.hmap = new HashMap<String, Runnable>() {
 			{
-				
-			}
+			    System.out.println("test3");
+			}//
 		};
 	}
 }
