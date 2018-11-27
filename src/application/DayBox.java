@@ -44,7 +44,7 @@ public class DayBox extends Group {
 		plusImage = new ImageView();
 		minusImage = new ImageView();
 		plusImage.setImage(new Image("application\\PlusIcon.png"));
-		plusImage.setImage(new Image("application\\MinusIcon.png"));
+		minusImage.setImage(new Image("application\\MinusIcon.png"));
 	
 		plusImage.setFitWidth(30);
 		plusImage.setFitHeight(30);
@@ -60,11 +60,14 @@ public class DayBox extends Group {
 		dayLabel.setLayoutX(5);
 		dayLabel.setLayoutY(5);
 		dayLabel.setFont(Font.font(16));
-		getChildren().addAll(calBox,dayLabel, plusImage);
+		getChildren().addAll(calBox,dayLabel, plusImage, minusImage);
 		EventTime.setDay(day);
 		calBox.layoutBoundsProperty().addListener((obs, oldval, newval) -> {
 			plusImage.setX(newval.getWidth() - (plusImage.getFitWidth() + 10));
 			plusImage.setY(plusImage.getFitHeight() - 20);
+			
+			minusImage.setX(newval.getWidth() - (minusImage.getFitWidth() + 10));
+			minusImage.setY(plusImage.getY() + 40);
 		});
 	}
 	
@@ -133,15 +136,15 @@ public class DayBox extends Group {
 		return false;
 	}
 	
-	
-	
 	public void selectDayBox() {
 		plusImage.setVisible(true);
+		minusImage.setVisible(true);
 		calBox.setStrokeWidth(2);
 	}
 	
 	public void deselectDayBox() {
 		plusImage.setVisible(false);
+		minusImage.setVisible(false);
 		calBox.setStrokeWidth(.2);
 	}
 	
