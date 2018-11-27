@@ -10,10 +10,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EventForm">
+<AnchorPane fx:id="anchorPane" prefHeight="412.0" prefWidth="396.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EventFormController">
    <children>
-      <GridPane alignment="CENTER" hgap="10.0" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <GridPane alignment="CENTER" hgap="10.0" layoutX="482.0" layoutY="-75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="50.0" minWidth="50.0" prefHeight="351.0" prefWidth="600.0" vgap="10.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,22 +27,38 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="lblTitle" text="Title" GridPane.halignment="CENTER" />
+            <Label fx:id="lblTitle" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" text="Title" GridPane.halignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDesc" alignment="CENTER" text="Description" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblStartTime" alignment="CENTER" text="Start Time" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblEndTime" alignment="CENTER" text="End Time" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
             <TextField fx:id="tfTitle" promptText="Enter Title" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-            <Label fx:id="lblDesc" text="Description" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label fx:id="lblStartTime" text="Start Time" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Label fx:id="lblEndTime" text="End Time" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <TextField fx:id="tfDesc" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <TextField fx:id="tfDesc" promptText="Enter Description" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <ComboBox prefWidth="50.0" />
-                  <ComboBox prefWidth="50.0" />
+                  <ComboBox fx:id="startHour" prefWidth="100.0" promptText="Hour" />
+                  <ComboBox fx:id="startMin" prefWidth="100.0" promptText="Minutes" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <ComboBox prefWidth="50.0" />
-                  <ComboBox prefWidth="50.0" />
+                  <ComboBox fx:id="endHour" prefWidth="100.0" promptText="Hour" />
+                  <ComboBox fx:id="endMin" prefWidth="100.0" promptText="Minutes" />
                </children>
             </HBox>
          </children>
@@ -51,15 +69,29 @@
             <Insets />
          </opaqueInsets>
       </GridPane>
-      <HBox fx:id="topSection" alignment="CENTER" layoutX="100.0" layoutY="-40.0" prefHeight="50.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="topSection" alignment="CENTER" layoutX="-53.0" layoutY="-36.0" prefHeight="40.0" prefWidth="396.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="lblFormTitle" text="Add Event" />
+            <Label fx:id="lblPrompt" text="Add Event">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </HBox>
-      <HBox fx:id="lowerSection" alignment="CENTER" prefHeight="50.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="148.0" layoutY="400.0" prefHeight="40.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="btnSubmit" text="Submit" />
+            <Label fx:id="lblWarning" alignment="CENTER" prefWidth="200.0" text="Fill out all fields" textFill="RED">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <HBox fx:id="buttonContainer" alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                  <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#addToDB" text="Submit" />
+               </children>
+            </HBox>
          </children>
-      </HBox>
+      </VBox>
    </children>
 </AnchorPane>

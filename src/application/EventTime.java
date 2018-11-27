@@ -6,23 +6,46 @@ import java.util.HashMap;
 // TODO: Ask if it makes sense in terms of organization to have static methods along with object methods in same class
 
 
-public class EventTime implements Comparable {
+public class EventTime implements Comparable, CurrentTime {
 	private int hour;
 	private int minute;
-	private String meridiem; // AM or PM
-	private static String [] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-	private static int [] numDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 	private static int currentMonth;
 	private static int currentYear;
 	private static int currentDay;
 	private static String currentDate;
-	
-	private HashMap <String, Integer> monthMap;
-	public EventTime(int H, int M, String MD) {
+
+	public EventTime(int H, int M) {
 		hour = H;
 		minute = M;
-		meridiem = MD;
-		monthMap = new HashMap<String, Integer>();
+	}
+	
+	public EventTime() {
+		hour = 0;
+		minute = 0;
+	}
+	
+	public void setHour(int h) {
+		hour = h;
+	}
+	
+	public void setHour(String h) {
+		hour = Integer.parseInt(h);
+	}
+	
+	public void setMinutes(int min) {
+		minute = min;
+	}
+	
+	public void setMinutes(String min) {
+		minute = Integer.parseInt(min);
+	}
+	
+	
+	
+	
+	public String getTimeValue() {
+		return(hour + ":" + minute);
 	}
 	
 	public static boolean isValidTime(String timeValue) {
