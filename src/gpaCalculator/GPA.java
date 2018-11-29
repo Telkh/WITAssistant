@@ -1,7 +1,14 @@
+
 package gpaCalculator;
 
 import java.util.ArrayList;
-
+/**
+ * This class calculates the GPA of course.
+ * The maximum letter grade is A.
+ * 
+ * @author Jesus Esgueva esguevaj@wit.edu
+ *
+ */
 public class GPA {
 	private final String [] GRADE = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"}; //grades
 	private double [] weight = new double[GRADE.length]; //weight of letter grades
@@ -14,10 +21,9 @@ public class GPA {
 		 this.course = course;
 		 this.grade = grade;
 		 this.credits = credits;
-		 //this.getPoints(this.credits, this.grade);
 		 
 	 }
-	
+	//Getters and setters
 	public GPA() {
 		generateValue();
 	}
@@ -60,16 +66,19 @@ public class GPA {
 			weight[i] = weight[i-1] - diff;
 		}
 	}
-	/*
-	 * Finds the total points earned in the course
+	/**
+	 *  Finds the total points earned in the course
+	 * @return Total points obtained
 	 */
 	public double getPoints() {
-		double points = this.credits * getWeight(this.grade);
+		double points = this.credits * getWeight(this.grade); // number of credits times the weight of the grade.
 		return points;
 	}
 	
-	/*
+	/**
 	 * Finds the weight of the letter grade.
+	 * @param Grade obtained in the course
+	 * @return The weight of the grade
 	 */
 	public double getWeight(String gradeInput) {
 		int i = 0;
@@ -78,6 +87,11 @@ public class GPA {
 		}
 		return weight[i];
 	}
+	/**
+	 * 
+	 * @param courses - ArrayList with GPA objects
+	 * @return total number of credits
+	 */
 	public static int sumCredits(ArrayList<GPA> courses) {
 		int sum = 0;
 		for (int i = 0; i < courses.size(); i++) {
@@ -85,6 +99,11 @@ public class GPA {
 		}
 		return sum;
 	}
+	/**
+	 * 
+	 * @param courses - ArrayList with GPA objects
+	 * @return Average GPA
+	 */
 	public static double getAverage(ArrayList<GPA> courses) {
 		double sum = 0;
 		for (int i = 0; i < courses.size(); i++) {
