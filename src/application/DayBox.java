@@ -28,6 +28,7 @@ public class DayBox extends Group {
 	
 	private int dayNum = 0;
 	private ImageView plusImage;
+	private ImageView minusImage;
 	private Label dayLabel;
 	private Rectangle calBox;
 	private int labelYPos = 0;
@@ -41,9 +42,16 @@ public class DayBox extends Group {
 		widthProperty = calBox.widthProperty();
 		heightProperty = calBox.heightProperty();
 		plusImage = new ImageView();
+		minusImage = new ImageView();
 		plusImage.setImage(new Image("application\\PlusIcon.png"));
+		minusImage.setImage(new Image("application\\MinusIcon.png"));
+	
 		plusImage.setFitWidth(30);
 		plusImage.setFitHeight(30);
+		
+		minusImage.setFitWidth(30);
+		minusImage.setFitHeight(30);
+		
 		deselectDayBox();
 		calBox.setStroke(Color.GRAY);
 		calBox.setStrokeWidth(.2);
@@ -52,11 +60,13 @@ public class DayBox extends Group {
 		dayLabel.setLayoutX(5);
 		dayLabel.setLayoutY(5);
 		dayLabel.setFont(Font.font(16));
-		getChildren().addAll(calBox,dayLabel, plusImage);
+		getChildren().addAll(calBox,dayLabel, plusImage, minusImage);
 		EventTime.setDay(day);
 		calBox.layoutBoundsProperty().addListener((obs, oldval, newval) -> {
 			plusImage.setX(newval.getWidth() - (plusImage.getFitWidth() + 10));
 			plusImage.setY(plusImage.getFitHeight() - 20);
+			minusImage.setX(newval.getWidth() - (minusImage.getFitWidth() + 10));
+			minusImage.setY(plusImage.getY() + 40);
 		});
 	}
 	
@@ -113,20 +123,27 @@ public class DayBox extends Group {
 		
 	}
 	
-	public boolean isInImageBounds(double X, double Y) { // TODO: Ask if there is better implementation possible (Call add event from within daybox)
+	public boolean isInPlusBounds(double X, double Y) { // TODO: Ask if there is better implementation possible (Call add event from within daybox)
 		if(plusImage.getBoundsInParent().contains(X, Y)) {
 			return true;
 		}
 		return false;
 	}
 	
+	public boolean isInMinusBounds(double x, double y) {
+		
+		return false;
+	}
+	
 	public void selectDayBox() {
 		plusImage.setVisible(true);
+		minusImage.setVisible(true);
 		calBox.setStrokeWidth(2);
 	}
 	
 	public void deselectDayBox() {
 		plusImage.setVisible(false);
+		minusImage.setVisible(false);
 		calBox.setStrokeWidth(.2);
 	}
 	

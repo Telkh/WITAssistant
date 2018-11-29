@@ -19,7 +19,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
@@ -35,17 +38,22 @@ import javafx.stage.Stage;
 
 public class AnchorPaneController {
 	
-	@FXML SplitPane splitPane;
-	@FXML AnchorPane leftSection;
-	@FXML AnchorPane rightSection;
-	@FXML AnchorPane contextPanel;
-	@FXML Label currentDateLabel;
-	@FXML VBox vContainer;
-	
-	private MenuItem itemEdit;
-	private double currentWidth;
-	private double currentHeight;
+	@FXML private SplitPane splitPane;
+	@FXML private AnchorPane leftSection;
+	@FXML private Label currentDateLabel;
+	@FXML private HBox lowerSection;
+	@FXML private Button btnPrev;
+	@FXML private Button btnNext;
+	@FXML private Button btnRefresh;
+	@FXML private VBox vContainer;
+	@FXML private TabPane rightSection;
+	@FXML private Tab tabAddEvent;
+	@FXML private Tab tabCalc;
+	@FXML private AnchorPane addEventPanel;
+	@FXML private Tab tabAssistant;
+	@FXML private AnchorPane assistantPanel;
 	private FXMLLoader fxmlLoader = new FXMLLoader();
+	private SingleSelectionModel<Tab> selectionModel;
 	
 	public void drawCalendar() {
 		vContainer.getChildren().clear();
@@ -75,28 +83,20 @@ public class AnchorPaneController {
 		dayBox.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				rightSection.getChildren().clear();
-				EventTime.setDay(dayBox.getDay()); // Set current day to day selected by user
-				System.out.println(EventTime.getDate());
-				if(dayBox.isInImageBounds(event.getX(), event.getY())) {
+	
+				EventTime.setDay(dayBox.getDay()); // Set current day to day selected by user	
+				System.out.println(EventTime.getDate() + " " + dayBox.getDay());
+				if(dayBox.isInPlusBounds(event.getX(), event.getY())) {
 					try {
-						contextPanel = fxmlLoader.load(getClass().getResource("EventForm.fxml"));
-						contextPanel.setPrefWidth(rightSection.getWidth());
-						EventFormController EFC = (EventFormController)fxmlLoader.getController();
-						rightSection.getChildren().addAll(contextPanel);
+						addEventPanel = fxmlLoader.load(getClass().getResource("EventForm.fxml"));
+						tabAddEvent.setContent(addEventPanel);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+					selectionModel.select(2);
 				}
 				else {
-					try {
-							System.out.println("Assistant");
-							contextPanel = fxmlLoader.load(getClass().getResource("Overview.fxml"));
-							contextPanel.setPrefWidth(rightSection.getWidth());
-							rightSection.getChildren().add(contextPanel);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+					addEventPanel.setDisable(true);
 				}
 			}
 		});
@@ -113,27 +113,6 @@ public class AnchorPaneController {
 				dayBox.selectDayBox();
 			}
 		});
-	}
-	
-	public void drawDayOverview() {
-		/*tfOverview.getChildren().clear(); // Reset TextFlow before displaying new text
-		if(EventDB.containsAtDate(EventTime.getDate())) {
-			ArrayList <Event> eventList = EventDB.getListAt(EventTime.getDate());
-			for(int i = 0; i < eventList.size(); i++) {
-				drawEventInformation(eventList.get(i));
-			}
-		}
-		else {
-			Text emptyMessage = new Text("There are no events on " + EventTime.getDate());
-			tfOverview.getChildren().add(emptyMessage);
-		}*/
-	}
-	
-	public void drawEventInformation(Event event) {
-	/*	Text title = new Text("\n" + event.getEventTitle());
-		title.setStyle("-fx-font-weight: bold");
-		Text desc = new Text("\n" + event.getEventDesc());
-		tfOverview.getChildren().addAll(title,desc); */
 	}
 	
 	public void nextButtonEvent() {
@@ -154,20 +133,28 @@ public class AnchorPaneController {
 
 	
 	public void initialize() {
-		//contextPanel.layoutXProperty().bind(rightSection.layoutXProperty());
-		contextPanel.setMinSize(0, 0);
-		rightSection.widthProperty().addListener((obs, oldval, newval) -> {
-			//System.out.println("Testing" + newval.doubleValue());
-			contextPanel.setPrefWidth(newval.doubleValue());
-		});
+		selectionModel = rightSection.getSelectionModel();	
 		splitPane.setDividerPosition(0, .75);
-		
 		EventTime.initializeDate();
-
-		currentDateLabel.setText(EventTime.getMonthName() + " " + EventTime.getYear());
+		try {
+			addEventPanel = fxmlLoader.load(getClass().getResource("EventForm.fxml"));
+			assistantPanel = fxmlLoader.load(getClass().getResource("Assistant.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
+		rightSection.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				int index = selectionModel.getSelectedIndex();
+				rightSection.getTabs().get(index).getContent().setDisable(false);
+			}
+			
+		});
+		tabAssistant.setContent(assistantPanel);
+		tabAddEvent.setContent(addEventPanel);
+		currentDateLabel.setText(EventTime.getMonthName() + " " + EventTime.getYear());
 		drawCalendar();
 	}
 }
-
 
