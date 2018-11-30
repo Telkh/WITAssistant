@@ -100,7 +100,9 @@ public class DayBox extends Group {
 	}
 	
 	public void getEvents() {
+
 		/*Collection <Event> eventList = EventDB.getListAt(EventTime.getDate());
+ 		branch 'master' of https://github.com/Telkh/WITAssistant.git
 		Iterator <Event> iterator = eventList.iterator();
 		while(iterator.hasNext()) {
 			Event tempEvent = iterator.next();

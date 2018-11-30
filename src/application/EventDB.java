@@ -1,5 +1,6 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import csvHandler.CsvHandler;
@@ -43,10 +44,14 @@ public class EventDB {
 	private static void addToCSV() {
 		eventHandler.writter(eventMap);
 	}
-	
-	
-	
-//	public static ArrayList<Event> getListAt(String keyValue){
-//		return eventMap.get(keyValue);
+
+//	public static ArrayList<String> getEvents() {
+//		ArrayList<String> event = new ArrayList<>();
+//		for(String key: )
+//		eventMap.containsKey(key)
+//		return event;
 //	}
+
+	
+
 }
