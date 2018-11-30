@@ -17,8 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-
-
 public class EventFormController {
 	@FXML private AnchorPane anchorPane;
 	@FXML private Label lblPrompt;
@@ -157,7 +155,7 @@ public class EventFormController {
 		}
 		tfTitle.clear();
 		tfDesc.clear();
-		startMin.setValue(startMin.getPromptText());
+		//startMin.setValue(startMin.getPromptText());
 	}
 	
 }

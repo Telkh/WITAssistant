@@ -44,13 +44,14 @@ public class EventDB {
 	private static void addToCSV() {
 		eventHandler.writter(eventMap);
 	}
+
 //	public static ArrayList<String> getEvents() {
 //		ArrayList<String> event = new ArrayList<>();
 //		for(String key: )
 //		eventMap.containsKey(key)
 //		return event;
 //	}
-//	public static ArrayList<Event> getListAt(String keyValue){
-//		return eventMap.get(keyValue);
-//	}
+
+	
+
 }

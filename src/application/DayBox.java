@@ -35,7 +35,6 @@ public class DayBox extends Group {
 	private DoubleProperty widthProperty;
 	private DoubleProperty heightProperty;
 	
-	
 	public DayBox(int day) {
 		dayNum = day;
 		calBox = new Rectangle(0, 0, 0,0);
@@ -57,7 +56,7 @@ public class DayBox extends Group {
 		calBox.setStrokeWidth(.2);
 		calBox.setFill(Color.WHITE);
 		dayLabel = new Label(Integer.toString(dayNum));
-		dayLabel.setLayoutX(5);
+		dayLabel.setLayoutX(5);	
 		dayLabel.setLayoutY(5);
 		dayLabel.setFont(Font.font(16));
 		getChildren().addAll(calBox,dayLabel, plusImage, minusImage);
@@ -101,13 +100,14 @@ public class DayBox extends Group {
 	}
 	
 	public void getEvents() {
-		Collection <Event> eventList = EventDB.;
+
+		/*Collection <Event> eventList = EventDB.getListAt(EventTime.getDate());
+ 		branch 'master' of https://github.com/Telkh/WITAssistant.git
 		Iterator <Event> iterator = eventList.iterator();
 		while(iterator.hasNext()) {
 			Event tempEvent = iterator.next();
 			drawEventLabel(tempEvent.getEventTitle());
-		}
-		
+		}*/
 	}
 	
 	private void drawEventLabel(String eventTitle) {
@@ -117,8 +117,6 @@ public class DayBox extends Group {
 		double labelWidth = fontLoader.computeStringWidth(eventLabel.getText(), eventLabel.getFont());
 		eventLabel.setLayoutY(labelYPos);
 		getChildren().add(eventLabel);
-		
-		
 	}
 	
 	public boolean isInPlusBounds(double X, double Y) { // TODO: Ask if there is better implementation possible (Call add event from within daybox)
