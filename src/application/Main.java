@@ -52,7 +52,9 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		EventDB.loadFromCSV();
+		
 		launch(args);
+		
 		
 		
 	CsvHandler foo  = new CsvHandler("userData");

@@ -45,12 +45,17 @@ public class EventDB {
 		eventHandler.writter(eventMap);
 	}
 
-//	public static ArrayList<String> getEvents() {
-//		ArrayList<String> event = new ArrayList<>();
-//		for(String key: )
-//		eventMap.containsKey(key)
-//		return event;
-//	}
+	public static ArrayList<Event> getEvents(String date) {
+		ArrayList<Event> dayEvents = new ArrayList<>();
+		for(String key: eventMap.keySet()) {
+			Event  event = eventMap.get(key);
+			if(key.contains(date)) {
+				dayEvents.add(event);
+			}
+		}
+		
+		return dayEvents;
+	}
 
 	
 
