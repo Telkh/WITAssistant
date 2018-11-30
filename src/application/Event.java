@@ -9,10 +9,10 @@ public class Event {
 	private EventTime endTime;
 	private boolean isAllDay;
 	
-	public Event(String title, String name, String date, EventTime start, EventTime end) {
+	public Event(String title, String description, String date, EventTime start, EventTime end) {
 		eventDate = date;
 		eventTitle = title;
-		eventDesc = name;
+		eventDesc = description;
 		startTime = start;
 		endTime = end;
 		isAllDay = false;

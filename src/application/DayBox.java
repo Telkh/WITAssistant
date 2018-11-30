@@ -127,11 +127,9 @@ public class DayBox extends Group {
 		}
 		return false;
 	}
-	
-	public boolean isInMinusBounds(double X, double Y) {
-		if(minusImage.getBoundsInParent().contains(X, Y)) {
-			return true;
-		}
+
+	public boolean isInMinusBounds(double x, double y) {
+		
 		return false;
 	}
 	

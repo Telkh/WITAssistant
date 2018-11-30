@@ -1,7 +1,6 @@
 package application;
 
 import java.io.IOException;
-
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -41,10 +40,15 @@ public class EventFormController {
 	private Stage stage = new Stage();
 	private Event event = new Event();
 	private boolean [] isFilled = new boolean[6];
-	private static boolean cancelRequested = false;
-	public static SimpleBooleanProperty formClosed = new SimpleBooleanProperty(cancelRequested);
 	
 	public void initialize() {
+		anchorPane.disabledProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				
+			}
+		});
+		
 		System.out.println("EventFromController Initialized");
 		lblPrompt.setText("Add Event for " + EventTime.getDate());
 		lblWarning.setVisible(false);
@@ -133,15 +137,24 @@ public class EventFormController {
 	}
 	
 	public void clearInput() {
+
 		//cancelRequested = true;
 		if(!allFieldsFilled()) {
 			lblWarning.setVisible(false);	
 		}
 		//anchorPane.getParent().setDisable(true);
-		cancelRequested = true;
+	
 	}
 	
 	public void cancel() {
 		clearInput();
+		
+		if(!allFieldsFilled()) {
+			lblWarning.setVisible(false);	
+		}
+		tfTitle.clear();
+		tfDesc.clear();
+		startMin.setValue(startMin.getPromptText());
 	}
+	
 }

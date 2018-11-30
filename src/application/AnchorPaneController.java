@@ -86,18 +86,23 @@ public class AnchorPaneController {
 		dayBox.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
+
 				EventTime.setDay(dayBox.getDay()); // Set current day to day selected by user	
 				System.out.println(EventTime.getDate() + " " + dayBox.getDay());
 				if(dayBox.isInPlusBounds(event.getX(), event.getY())) {
 					try {
 						addEventPanel = fxmlLoader.load(getClass().getResource("EventForm.fxml"));
 						tabAddEvent.setContent(addEventPanel);
-						addEventPanel.setDisable(true);
-					} catch (IOException e) {
+						addEventPanel.setDisable(true);					} catch (IOException e) {
 						e.printStackTrace();
 					}
 					selectionModel.select(2);
+
 					leftSection.setDisable(true);
+
+				}
+				else {
+					addEventPanel.setDisable(true);
 				}
 			}
 		});
@@ -143,14 +148,15 @@ public class AnchorPaneController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		addEventPanel.disabledProperty().addListener(new ChangeListener<Boolean>(){
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldval, Boolean newval) {
-				System.out.println("Changed");
-			}
-		});
 
+		rightSection.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				int index = selectionModel.getSelectedIndex();
+				rightSection.getTabs().get(index).getContent().setDisable(false);
+			}
+			
+		});
 		tabAssistant.setContent(assistantPanel);
 		tabAddEvent.setContent(addEventPanel);
 		currentDateLabel.setText(EventTime.getMonthName() + " " + EventTime.getYear());
