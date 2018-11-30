@@ -81,7 +81,6 @@ public class AnchorPaneController {
 					}
 					selectionModel.select(2);
 
-					leftSection.setDisable(true);
 
 				}
 				else {

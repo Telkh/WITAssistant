@@ -3,7 +3,7 @@ package application;
 
 import java.io.IOException;
 
-import gpaCalculator.GPA;
+import csvHandler.CsvHandler;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,7 +51,15 @@ public class Main extends Application {
 	
 
 	public static void main(String[] args) {
+		EventDB.loadFromCSV();
 		launch(args);
+		
+		
+	CsvHandler foo  = new CsvHandler("userData");
+	
+	//foo.reader();
+//		Event event = new Event("title", "test", "11/30/2018", new EventTime("12:30"),new EventTime("1:30"));
+//		System.out.println(event.generateKey());
 //		GPA g = new GPA();
 //		g.generateValue();
 //		g.toString();

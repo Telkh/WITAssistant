@@ -100,13 +100,12 @@ public class DayBox extends Group {
 	}
 	
 	public void getEvents() {
-		Collection <Event> eventList = EventDB.getListAt(EventTime.getDate());
+		/*Collection <Event> eventList = EventDB.getListAt(EventTime.getDate());
 		Iterator <Event> iterator = eventList.iterator();
 		while(iterator.hasNext()) {
 			Event tempEvent = iterator.next();
 			drawEventLabel(tempEvent.getEventTitle());
-		}
-		
+		}*/
 	}
 	
 	private void drawEventLabel(String eventTitle) {
@@ -116,8 +115,6 @@ public class DayBox extends Group {
 		double labelWidth = fontLoader.computeStringWidth(eventLabel.getText(), eventLabel.getFont());
 		eventLabel.setLayoutY(labelYPos);
 		getChildren().add(eventLabel);
-		
-		
 	}
 	
 	public boolean isInPlusBounds(double X, double Y) { // TODO: Ask if there is better implementation possible (Call add event from within daybox)

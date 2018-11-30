@@ -17,8 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-
-
 public class EventFormController {
 	@FXML private AnchorPane anchorPane;
 	@FXML private Label lblPrompt;
@@ -50,6 +48,7 @@ public class EventFormController {
 		});
 		
 		System.out.println("EventFromController Initialized");
+		
 		lblPrompt.setText("Add Event for " + EventTime.getDate());
 		lblWarning.setVisible(false);
 		for(int i = 1; i <= 24; i++) {
@@ -81,6 +80,8 @@ public class EventFormController {
 			event.setEventDesc(newval);
 		});
 		
+		event.setEventDate(EventTime.getDateKeyFormat()); //sets date
+		
 		startHour.getSelectionModel().selectedItemProperty().addListener((options, oldval, newval) -> {
 			isFilled[2] = true;
 			event.getStartTime().setHour(newval);
@@ -105,8 +106,8 @@ public class EventFormController {
 	public void addToDB() {
 		if(allFieldsFilled()) {
 			System.out.println("Adding to DB");
-			EventDB.addToEventDB(event, EventTime.getDate());
-			System.out.println(EventDB.getListAt(EventTime.getDate()));
+			EventDB.addToEventDB(event.generateKey(), event);
+			System.out.println(event.toString());
 			clearInput();
 		}
 		else {
@@ -154,7 +155,7 @@ public class EventFormController {
 		}
 		tfTitle.clear();
 		tfDesc.clear();
-		startMin.setValue(startMin.getPromptText());
+		//startMin.setValue(startMin.getPromptText());
 	}
 	
 }

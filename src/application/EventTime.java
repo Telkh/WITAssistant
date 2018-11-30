@@ -160,6 +160,10 @@ public class EventTime implements Comparable, CurrentTime {
 		currentDate = (currentMonth + "/" + currentDay + "/" + currentYear);
 		return currentDate;
 	}
+	public static String getDateKeyFormat() {
+		currentDate = String.format("%d/%d/%d", currentYear, currentMonth, currentDay); 
+		return currentDate;
+	}
 	
 	@Override
 	public int compareTo(Object arg0) {
