@@ -65,7 +65,6 @@ public class DayBox extends Group {
 		calBox.layoutBoundsProperty().addListener((obs, oldval, newval) -> {
 			plusImage.setX(newval.getWidth() - (plusImage.getFitWidth() + 10));
 			plusImage.setY(plusImage.getFitHeight() - 20);
-			
 			minusImage.setX(newval.getWidth() - (minusImage.getFitWidth() + 10));
 			minusImage.setY(plusImage.getY() + 40);
 		});
@@ -117,8 +116,6 @@ public class DayBox extends Group {
 		Label eventLabel = new Label(eventTitle);
 		double labelWidth = fontLoader.computeStringWidth(eventLabel.getText(), eventLabel.getFont());
 		eventLabel.setLayoutY(labelYPos);
-		//eventLabel.setLayoutX((calBox.getWidth() / 2) - (labelWidth) / 2);
-	
 		getChildren().add(eventLabel);
 		
 		
@@ -131,8 +128,10 @@ public class DayBox extends Group {
 		return false;
 	}
 	
-	public boolean isInMinusBounds(double x, double y) {
-		
+	public boolean isInMinusBounds(double X, double Y) {
+		if(minusImage.getBoundsInParent().contains(X, Y)) {
+			return true;
+		}
 		return false;
 	}
 	

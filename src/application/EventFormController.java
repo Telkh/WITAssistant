@@ -2,6 +2,9 @@ package application;
 
 import java.io.IOException;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,8 +21,8 @@ import javafx.stage.Stage;
 
 
 public class EventFormController {
-	//@FXML private Button btnSubmit;
 	@FXML private AnchorPane anchorPane;
+	@FXML private Label lblPrompt;
     @FXML private Label lblTitle;
     @FXML private Label lblDesc;
     @FXML private Label lblStartTime;
@@ -34,12 +37,16 @@ public class EventFormController {
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
     @FXML private Label lblWarning;
+    
 	private Stage stage = new Stage();
 	private Event event = new Event();
 	private boolean [] isFilled = new boolean[6];
+	private static boolean cancelRequested = false;
+	public static SimpleBooleanProperty formClosed = new SimpleBooleanProperty(cancelRequested);
 	
 	public void initialize() {
 		System.out.println("EventFromController Initialized");
+		lblPrompt.setText("Add Event for " + EventTime.getDate());
 		lblWarning.setVisible(false);
 		for(int i = 1; i <= 24; i++) {
 			startHour.getItems().add(Integer.toString(i));
@@ -55,7 +62,6 @@ public class EventFormController {
 				startMin.getItems().add(Integer.toString(j));
 				endMin.getItems().add(Integer.toString(j));
 			}
-			
 		}
 		setEvent();
 	}
@@ -96,6 +102,8 @@ public class EventFormController {
 		if(allFieldsFilled()) {
 			System.out.println("Adding to DB");
 			EventDB.addToEventDB(event, EventTime.getDate());
+			System.out.println(EventDB.getListAt(EventTime.getDate()));
+			clearInput();
 		}
 		else {
 			lblWarning.setVisible(true);
@@ -110,18 +118,30 @@ public class EventFormController {
 		}
 		return true;
 	}
-	
+
 	public Event getEvent() {
 		return event;
 	}
 	
-	public void cancel() {
-		System.out.println("Clearing");
-		anchorPane.getChildren().clear();
+	public void resumeInput() {
+		lblPrompt.setText("Add Event for " + EventTime.getDate());
 	}
 	
+	public void pauseInput() {
+		System.out.println("Pausing");
+		lblPrompt.setText(lblPrompt.getText() + ": Paused");
+	}
 	
-	public void exit() {
-		System.out.println("Close");
+	public void clearInput() {
+		//cancelRequested = true;
+		if(!allFieldsFilled()) {
+			lblWarning.setVisible(false);	
+		}
+		//anchorPane.getParent().setDisable(true);
+		cancelRequested = true;
+	}
+	
+	public void cancel() {
+		clearInput();
 	}
 }
