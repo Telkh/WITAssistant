@@ -35,7 +35,6 @@ public class DayBox extends Group {
 	private DoubleProperty widthProperty;
 	private DoubleProperty heightProperty;
 	
-	
 	public DayBox(int day) {
 		dayNum = day;
 		calBox = new Rectangle(0, 0, 0,0);
@@ -57,7 +56,7 @@ public class DayBox extends Group {
 		calBox.setStrokeWidth(.2);
 		calBox.setFill(Color.WHITE);
 		dayLabel = new Label(Integer.toString(dayNum));
-		dayLabel.setLayoutX(5);
+		dayLabel.setLayoutX(5);	
 		dayLabel.setLayoutY(5);
 		dayLabel.setFont(Font.font(16));
 		getChildren().addAll(calBox,dayLabel, plusImage, minusImage);

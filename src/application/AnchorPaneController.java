@@ -1,42 +1,23 @@
 package application;
 
-import java.awt.Font;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+import gpaCalculator.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
+
 
 public class AnchorPaneController {
 	
@@ -51,9 +32,11 @@ public class AnchorPaneController {
 	@FXML private TabPane rightSection;
 	@FXML private Tab tabAddEvent;
 	@FXML private Tab tabCalc;
+	@FXML private AnchorPane calcPanel;
 	@FXML private AnchorPane addEventPanel;
 	@FXML private Tab tabAssistant;
 	@FXML private AnchorPane assistantPanel;
+	
 	private FXMLLoader fxmlLoader = new FXMLLoader();
 	private SingleSelectionModel<Tab> selectionModel;
 	
@@ -86,14 +69,14 @@ public class AnchorPaneController {
 		dayBox.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-
+				
 				EventTime.setDay(dayBox.getDay()); // Set current day to day selected by user	
 				System.out.println(EventTime.getDate() + " " + dayBox.getDay());
 				if(dayBox.isInPlusBounds(event.getX(), event.getY())) {
 					try {
 						addEventPanel = fxmlLoader.load(getClass().getResource("EventForm.fxml"));
 						tabAddEvent.setContent(addEventPanel);
-						addEventPanel.setDisable(true);					} catch (IOException e) {
+									} catch (IOException e) {
 						e.printStackTrace();
 					}
 					selectionModel.select(2);
@@ -145,6 +128,7 @@ public class AnchorPaneController {
 		try {
 			addEventPanel = fxmlLoader.load(getClass().getResource("EventForm.fxml"));
 			assistantPanel = fxmlLoader.load(getClass().getResource("Assistant.fxml"));
+			calcPanel = fxmlLoader.load(getClass().getResource("Calculator.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -158,6 +142,7 @@ public class AnchorPaneController {
 			
 		});
 		tabAssistant.setContent(assistantPanel);
+		tabCalc.setContent(calcPanel);
 		tabAddEvent.setContent(addEventPanel);
 		currentDateLabel.setText(EventTime.getMonthName() + " " + EventTime.getYear());
 		drawCalendar();

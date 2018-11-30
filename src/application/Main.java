@@ -3,6 +3,7 @@ package application;
 
 import java.io.IOException;
 
+import gpaCalculator.GPA;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,19 +35,14 @@ public class Main extends Application {
 	// Test
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		
 		Parent root  = FXMLLoader.load(getClass().getResource("Main.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("WITAssistant");
 		primaryStage.setScene(scene);
-		
 		primaryStage.setWidth(1500);
 		primaryStage.setHeight(1000);
-		
-		
 		primaryStage.setMinWidth(750);
 		primaryStage.setMinHeight(500);
-		
 		primaryStage.heightProperty().addListener((obs, oldval, newval) -> {
 			
 		});
