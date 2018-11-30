@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class ClassRow extends HBox{
-	
+	//TEst
 	private TextField tfCourseName;
 	private ComboBox gradeOptions;
 	private TextField tfCredits;
