@@ -101,7 +101,7 @@ public class DayBox extends Group {
 	}
 	
 	public void getEvents() {
-		Collection <Event> eventList = EventDB.getListAt(EventTime.getDate());
+		Collection <Event> eventList = EventDB.;
 		Iterator <Event> iterator = eventList.iterator();
 		while(iterator.hasNext()) {
 			Event tempEvent = iterator.next();
