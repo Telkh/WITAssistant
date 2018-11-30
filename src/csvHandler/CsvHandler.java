@@ -3,46 +3,48 @@ package csvHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Scanner;
+import java.util.TreeMap;
+
 import application.Event;
 import application.EventTime;
 
 public class CsvHandler {
 	String fileName;
-	String path;
 	int numColumns = 5;
 	int DATE = 0;
+	String readError = String.format("The path '%s' is invalid. Refer to 'csvHandler/CSVhandler'.", getPath(fileName));
 	
 	
 	public CsvHandler(String fileName){
 		this.fileName = fileName;
-		path = "calendarData/" + this.fileName + ".csv";
+		
 	}
 	
-	public void reader() {
-		File fileIn = new File(path); //file object
-		HashMap<String, Event> events = new HashMap<>(); //creates events map
+	public TreeMap<String, Event> reader() {
+		File fileIn = new File(getPath(fileName)); //file object
+		TreeMap<String, Event> events = new TreeMap<>(); //creates events map
 		try (Scanner in = new Scanner(fileIn)) { //try to read the file
 			while (in.hasNextLine()) {
-				
-				String line = addComma(in.nextLine());
-				System.out.println(line);
+				String line = addComma(in.nextLine());//add a comma to the end of the line
+				System.out.println(line); //debug
+				//add elements to the map
 				events.put(getData(line, DATE), new Event(getData(line, 1), getData(line, 2), getData(line, 0),
-						new EventTime(Integer.parseInt(getData(line, 3).substring(0, 2)), Integer.parseInt(getData(line, 3).substring(3, getData(line, 3).length()))) ,
-						new EventTime(Integer.parseInt(getData(line, 3).substring(0, 2)), Integer.parseInt(getData(line, 4).substring(3, getData(line, 4).length())))));
+						new EventTime(getData(line, 3)), new EventTime(getData(line, 4))));
+					
 			}
 		} catch (FileNotFoundException ex1) {
-			System.out.printf("The path '%s' is invalid. Refer to 'csvHandler/CSVhandler'.", path);
+			System.out.println(readError);
 			System.exit(1);
 		}
-		printMap(events);
+		printMap(events); //debug
+		return events;
 	}
-	public static void printMap(HashMap<String, Event> map){
+	public static void printMap(TreeMap<String, Event> map){
 		System.out .println("Events: ");
 		for(String date: map.keySet()){
 		Event v = map.get(date);
-		System.out .println(date + " --> " + v.getStartTime() + " feet.");
+		System.out .println(date + " -->  " + v.getStartTime().getTimeValue());
 		}
 		System.out .println();
 		}
@@ -88,25 +90,46 @@ public class CsvHandler {
 		return posComma;
 	}
 	
-	public void writter(String eventData) {
-		File fileOut = new File("calendarData/userData1.csv");
-		File fileIn = new File(path);
-		File file = new File("calendarData/user.csv");
-		try(Scanner in = new Scanner(fileIn);
-				PrintWriter fout = new PrintWriter(fileOut)){
-			while (in.hasNextLine()) {
-				String a = in.nextLine();
-				System.out.println(a);
-				fout.println(a);
+//	public void writter(String eventData) {
+//		File fileOut = new File("calendarData/userData1.csv");
+//		File fileIn = new File(path);
+//		File file = new File("calendarData/user.csv");
+//		try(
+//				PrintWriter fout = new PrintWriter(path)){
+////			while (in.hasNextLine()) {
+////				String a = in.nextLine();
+////				System.out.println(a);
+////				fout.println(a);
+////			}
+//			
+//			fout.println(eventData);
+//			
+//			//file.delete();
+//			
+//		} catch (FileNotFoundException ex2) {
+//			System.out.println("File unable to write");
+//			System.exit(2);
+//		}
+//	}
+	public String getPath(String fileName) {
+		return String.format("calendarData/%s.csv", fileName);
+	}
+	
+	public String getPath(String fileName, boolean tmp) {
+		return String.format("calendarData/%sTMP.csv", fileName);
+	}
+	
+	public void copyFile(File source, File target) {
+		try(Scanner in = new Scanner(source);
+				PrintWriter out = new PrintWriter(target)){
+			while(in.hasNextLine()) {
+				String line = in.nextLine();
+				out.println(line);
 			}
-			
-			fout.println(eventData);
-			
-			file.delete();
-			
-		} catch (FileNotFoundException ex2) {
-			System.out.println("File unable to write");
-			System.exit(2);
+		} catch (FileNotFoundException e) {
+			System.out.println(readError);
+			e.printStackTrace();
 		}
+		
 	}
 }

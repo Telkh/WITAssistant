@@ -20,6 +20,24 @@ public class EventTime implements Comparable, CurrentTime {
 		minute = M;
 	}
 	
+	public EventTime(String time) {
+		hour = Integer.parseInt(timeFormat(time)[0]);
+		minute = Integer.parseInt(timeFormat(time)[1]);
+	}
+	
+	/**
+	 * Separates the time from a string "12:32" into 12 and 32;
+	 * @param time 
+	 * @return Array of 2 values. [H][M]
+	 */
+	public String[] timeFormat(String time) {
+		String [] timeArray = new String[2];
+		int separator = time.indexOf(":");
+		timeArray[0] = time.substring(0, separator);
+		timeArray[1] = time.substring(separator + 1);
+		return timeArray;
+	}
+	
 	public EventTime() {
 		hour = 0;
 		minute = 0;
@@ -42,7 +60,13 @@ public class EventTime implements Comparable, CurrentTime {
 	}
 	
 	
+	public int getHour() {
+		return hour;
+	}
 	
+	public int getMinute() {
+		return minute;
+	}
 	
 	public String getTimeValue() {
 		return(hour + ":" + minute);
