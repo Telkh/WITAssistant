@@ -75,8 +75,16 @@ public class Event {
 	}
 
 	public String toString() {
-		String output = ("Title: " + eventTitle + " Name: " + eventDesc + " Start Time: " + startTime + " End Time: " + endTime);
+		String output = String.format("Title: %s%nDescription: %s%nStart time: %s  End Time: %s", eventTitle, eventDesc, startTime.getTimeValue(), endTime.getTimeValue());
 		return output;
 	}
-	
+	/**
+	 * Generate a key for an event.
+	 * @param event
+	 * @return key
+	 */
+	public String generateKey() {
+		String key = String.format("%s-%s", this.eventDate, this.startTime.getTimeValue());
+		return key;
+	}
 }

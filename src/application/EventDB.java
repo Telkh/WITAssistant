@@ -1,23 +1,26 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
+
+import csvHandler.CsvHandler;
 
 public class EventDB {
 
-	private static HashMap <String, ArrayList<Event>> eventMap = new HashMap <String, ArrayList<Event>>();
+	private static TreeMap <String, Event> eventMap = new TreeMap <String, Event>();
 	
-	public static void addToEventDB(Event event, String keyValue) {
+	public EventDB() {
+		loadFromCSV();
+	}
+	
+	public static void addToEventDB(String keyValue, Event event) {
 		if(eventMap.containsKey(keyValue)) {
 			System.out.println("EventDB already contains data on date " + keyValue);
-			eventMap.get(keyValue).add(event);
+			System.out.println(eventMap.get(keyValue).toString());
 		}
 		else {
-			ArrayList<Event> eventList = new ArrayList<Event>();
-			eventList.add(event);
-			
-			eventMap.put(keyValue, eventList);
-			System.out.println("Received event: " + event);
+			eventMap.put(keyValue, event);
+			System.out.println("Received event: " + event.toString());
+			CsvHandler.printMap(eventMap);
 		}
 		
 	}
@@ -30,15 +33,17 @@ public class EventDB {
 	}
 	
 	// Load all information from CSV into HashMap
-	private void loadFromCSV() {
-		
+	public static void loadFromCSV() {
+		CsvHandler eventHandler = new CsvHandler("userData");
+		eventHandler.reader(eventMap);
+		CsvHandler.printMap(eventMap);
 	}
 	
 	private void addToCSV() {
 		
 	}
 	
-	public static ArrayList<Event> getListAt(String keyValue){
-		return eventMap.get(keyValue);
-	}
+//	public static ArrayList<Event> getListAt(String keyValue){
+//		return eventMap.get(keyValue);
+//	}
 }

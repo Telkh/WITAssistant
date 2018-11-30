@@ -21,17 +21,17 @@ public class CsvHandler {
 		
 	}
 	
-	public TreeMap<String, Event> reader() {
+	public TreeMap<String, Event> reader(TreeMap<String, Event> events) {
 		File fileIn = new File(getPath(fileName)); //file object
-		TreeMap<String, Event> events = new TreeMap<>(); //creates events map
+		//TreeMap<String, Event> events = new TreeMap<>(); //creates events map
 		try (Scanner in = new Scanner(fileIn)) { //try to read the file
 			while (in.hasNextLine()) {
 				String line = addComma(in.nextLine());//add a comma to the end of the line
 				System.out.println(line); //debug
 				//add elements to the map
-				events.put(getData(line, DATE), new Event(getData(line, 1), getData(line, 2), getData(line, 0),
-						new EventTime(getData(line, 3)), new EventTime(getData(line, 4))));
-					
+				
+				events.put(getData(line, 0), new Event(getData(line, 1), getData(line, 2), getData(line, 0),
+						new EventTime(getData(line, 3)), new EventTime(getData(line, 4))));	
 			}
 		} catch (FileNotFoundException ex1) {
 			System.out.println(readError);
