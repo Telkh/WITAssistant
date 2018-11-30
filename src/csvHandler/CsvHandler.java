@@ -90,27 +90,22 @@ public class CsvHandler {
 		return posComma;
 	}
 	
-//	public void writter(String eventData) {
-//		File fileOut = new File("calendarData/userData1.csv");
+	public void writter(TreeMap<String, Event> eventMap) {
+		File fileOut = new File(getPath(fileName));
 //		File fileIn = new File(path);
 //		File file = new File("calendarData/user.csv");
-//		try(
-//				PrintWriter fout = new PrintWriter(path)){
-////			while (in.hasNextLine()) {
-////				String a = in.nextLine();
-////				System.out.println(a);
-////				fout.println(a);
-////			}
-//			
-//			fout.println(eventData);
-//			
-//			//file.delete();
-//			
-//		} catch (FileNotFoundException ex2) {
-//			System.out.println("File unable to write");
-//			System.exit(2);
-//		}
-//	}
+		try(PrintWriter fout = new PrintWriter(fileOut)){
+			for(String date: eventMap.keySet()) {
+				Event event = eventMap.get(date);
+				String line = String.format("%s,%s,%s,%s,%s", date, event.getEventTitle(), event.getEventDesc(), event.getStartTime().getTimeValue(), event.getEndTime().getTimeValue());
+				fout.println(line);
+			}
+			
+		} catch (FileNotFoundException ex2) {
+			System.out.println("File unable to write");
+			System.exit(2);
+		}
+	}
 	public String getPath(String fileName) {
 		return String.format("calendarData/%s.csv", fileName);
 	}

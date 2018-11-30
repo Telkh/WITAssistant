@@ -7,7 +7,7 @@ import csvHandler.CsvHandler;
 public class EventDB {
 
 	private static TreeMap <String, Event> eventMap = new TreeMap <String, Event>();
-	
+	static CsvHandler eventHandler = new CsvHandler("userData");
 	public EventDB() {
 		loadFromCSV();
 	}
@@ -21,6 +21,7 @@ public class EventDB {
 			eventMap.put(keyValue, event);
 			System.out.println("Received event: " + event.toString());
 			CsvHandler.printMap(eventMap);
+			addToCSV();
 		}
 		
 	}
@@ -34,13 +35,13 @@ public class EventDB {
 	
 	// Load all information from CSV into HashMap
 	public static void loadFromCSV() {
-		CsvHandler eventHandler = new CsvHandler("userData");
+		
 		eventHandler.reader(eventMap);
 		CsvHandler.printMap(eventMap);
 	}
 	
-	private void addToCSV() {
-		
+	private static void addToCSV() {
+		eventHandler.writter(eventMap);
 	}
 	
 //	public static ArrayList<Event> getListAt(String keyValue){
