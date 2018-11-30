@@ -55,7 +55,7 @@ public class GPA {
 		public void setCourse(String course) {
 			this.course = course;
 		}
-
+//Test
 	/*
 	 * Generates the weights of each letter grade
 	 */

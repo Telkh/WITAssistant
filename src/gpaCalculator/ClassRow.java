@@ -1,18 +1,18 @@
 package gpaCalculator;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class ClassRow extends HBox{
-	
+	//TEst
 	private TextField tfCourseName;
 	private ComboBox gradeOptions;
 	private TextField tfCredits;
 	private final String [] GRADE = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"}; //grades
 
-	
-	
 	public ClassRow() {
 		tfCourseName= new TextField();
 		tfCredits = new TextField();
@@ -25,6 +25,10 @@ public class ClassRow extends HBox{
 			gradeOptions.getItems().add(GRADE[i]);
 		}
 		super.getChildren().addAll(tfCourseName, gradeOptions, tfCredits);
+		super.setAlignment(Pos.CENTER);
+		super.setSpacing(10);
 	}
+	
+	
 	
 }

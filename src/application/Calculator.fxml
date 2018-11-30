@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CalculatorController">
    <children>
       <HBox fx:id="topSection" alignment="CENTER" layoutX="82.0" prefHeight="70.0" prefWidth="600.0" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -23,6 +22,6 @@
             <Button fx:id="btnSubmit" mnemonicParsing="false" text="Submit" />
          </children>
       </HBox>
-      <VBox fx:id="vBoxForm" layoutX="222.0" layoutY="70.0" prefHeight="330.0" prefWidth="600.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+      <VBox fx:id="vBoxForm" alignment="TOP_RIGHT" layoutX="222.0" layoutY="70.0" prefHeight="200.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
    </children>
 </AnchorPane>
