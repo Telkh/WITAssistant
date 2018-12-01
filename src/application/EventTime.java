@@ -33,9 +33,24 @@ public class EventTime implements Comparable, CurrentTime {
 	public String[] timeFormat(String time) {
 		String [] timeArray = new String[2];
 		int separator = time.indexOf(":");
-		timeArray[0] = time.substring(0, separator);
-		timeArray[1] = time.substring(separator + 1);
+		timeArray[0] = removeSpace(time.substring(0, separator));
+		timeArray[1] = removeSpace(time.substring(separator + 1));
+		
 		return timeArray;
+	}
+	/**
+	 * Removes extra white spaces
+	 * @param target
+	 * @return
+	 */
+	public String removeSpace(String target) {
+		StringBuffer element = new StringBuffer(target);
+		if(target.contains(" ")) {
+			int space = target.indexOf(" ");
+			element = element.replace(space, space + 1, "0");
+		}
+		
+		return element.toString();
 	}
 	
 	public EventTime() {
@@ -69,7 +84,16 @@ public class EventTime implements Comparable, CurrentTime {
 	}
 	
 	public String getTimeValue() {
-		return(hour + ":" + minute);
+		String h = String.format("%d", hour);
+		String m = String.format("%d", minute);
+		//add 0 if the value is a single digit
+		if(hour < 10) {
+			h = String.format("0%d", hour);
+		}
+		if(minute < 10) {
+			m = String.format("0%d", minute);
+		}
+		return String.format("%s:%s", h,m);
 	}
 	
 	public static boolean isValidTime(String timeValue) {

@@ -54,16 +54,6 @@ public class Main extends Application {
 		EventDB.loadFromCSV();
 		
 		launch(args);
-		
-		
-		
-	CsvHandler foo  = new CsvHandler("userData");
-	
-	//foo.reader();
-//		Event event = new Event("title", "test", "11/30/2018", new EventTime("12:30"),new EventTime("1:30"));
-//		System.out.println(event.generateKey());
-//		GPA g = new GPA();
-//		g.generateValue();
-//		g.toString();
+		//EventDB db = new EventDB();
 	}
 }
