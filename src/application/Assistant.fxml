@@ -21,7 +21,7 @@
             <TextField fx:id="tfInput" />
             <HBox fx:id="hContainer" alignment="CENTER" prefHeight="28.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="btnSubmit" mnemonicParsing="false" text="Submit" />
+                  <Button fx:id="btnSubmit" mnemonicParsing="false" text="Submit" onAction ="#ClickMe"/>
                </children>
             </HBox>
             <TextFlow fx:id="textFlowOutput" prefHeight="351.0" prefWidth="600.0" />
