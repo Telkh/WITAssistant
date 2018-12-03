@@ -19,7 +19,7 @@ public class Command {
 	
 	public static String commandTerm(String term) {
 		String newterm[];
-		newterm = term.split(" ", 2);
+		newterm = term.split(" ", 1);
 		if (term.contains("~calender")) {
 			return calender();
 		}
@@ -53,6 +53,7 @@ public class Command {
 			return "Please enter a term after the command";
 		}
 		
+		message = message.substring(9);
 		if (message.contains(" ")) {
 			message = message.toLowerCase().replace(" ", "+");
 			return "https://wit.edu/wentworth-directory?name="+ message + "&field_colleges_target_id=All&field_department_target_id=All";
@@ -65,6 +66,7 @@ public class Command {
 			return "Please enter a term after the command";
 		}
 		
+		message = message.substring(8);
 		if (message.contains(" ")) {
 			message = message.toLowerCase().replace(" ", "%20");
 			return "https://wit.edu/search/" + message;
