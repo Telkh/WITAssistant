@@ -2,7 +2,6 @@ package application;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
-
 import csvHandler.CsvHandler;
 
 public class EventDB {
@@ -20,8 +19,8 @@ public class EventDB {
 		}
 		else {
 			eventMap.put(keyValue, event);
-			System.out.println("Received event: " + event.toString());
-			CsvHandler.printMap(eventMap);
+			//System.out.println("Received event:\n" + event.toString()); //debug
+			//CsvHandler.printMap(eventMap); //debug
 			addToCSV();
 		}
 		
@@ -36,22 +35,31 @@ public class EventDB {
 	
 	// Load all information from CSV into HashMap
 	public static void loadFromCSV() {
-		
 		eventHandler.reader(eventMap);
-		CsvHandler.printMap(eventMap);
+		//CsvHandler.printMap(eventMap); //debug
 	}
 	
+	/**
+	 * Creates a CSV file with the data in the treeMap
+	 */
 	private static void addToCSV() {
-		eventHandler.writter(eventMap);
+		eventHandler.writer(eventMap);
 	}
-
-//	public static ArrayList<String> getEvents() {
-//		ArrayList<String> event = new ArrayList<>();
-//		for(String key: )
-//		eventMap.containsKey(key)
-//		return event;
-//	}
-
-	
-
+/**
+ * Gets all the events in a day
+ * @param dateToSearch
+ * @return ArrayList with events.
+ */
+	public static ArrayList<Event> getEvents(String dateToSearch) {
+		ArrayList<Event> dayEvents = new ArrayList<>(); //Creates arrayList
+		for(String key: eventMap.keySet()) { //loops trough all the keys.
+			Event  event = eventMap.get(key); //create Event object to pass in the ArrayList
+			int dashIndex = key.indexOf("-"); // Finds index of character '-' in key
+			String currentDate = key.substring(0,dashIndex); // Stores date of entry in TreeMap
+			if(currentDate.equals(dateToSearch)) { // if the key contains the date. Add to ArrayList
+				dayEvents.add(event);
+			}
+		}
+		return dayEvents;
+	}
 }

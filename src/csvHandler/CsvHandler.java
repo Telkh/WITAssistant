@@ -17,19 +17,17 @@ public class CsvHandler {
 	
 	
 	public CsvHandler(String fileName){
-		this.fileName = fileName;
-		
+		this.fileName = fileName;	
 	}
 	
 	public TreeMap<String, Event> reader(TreeMap<String, Event> events) {
 		File fileIn = new File(getPath(fileName)); //file object
-		//TreeMap<String, Event> events = new TreeMap<>(); //creates events map
 		try (Scanner in = new Scanner(fileIn)) { //try to read the file
 			while (in.hasNextLine()) {
 				String line = addComma(in.nextLine());//add a comma to the end of the line
 				System.out.println(line); //debug
-				//add elements to the map
 				
+				//add elements to the map
 				events.put(getData(line, 0), new Event(getData(line, 1), getData(line, 2), getData(line, 0),
 						new EventTime(getData(line, 3)), new EventTime(getData(line, 4))));	
 			}
@@ -37,7 +35,7 @@ public class CsvHandler {
 			System.out.println(readError);
 			System.exit(1);
 		}
-		printMap(events); //debug
+//		printMap(events); //debug
 		return events;
 	}
 	public static void printMap(TreeMap<String, Event> map){
@@ -49,7 +47,7 @@ public class CsvHandler {
 		System.out .println();
 		}
 	/**
-	 * Adds a coma to the end of a string.
+	 * Adds a comma to the end of a string.
 	 * @param line
 	 * @return
 	 */
@@ -90,7 +88,7 @@ public class CsvHandler {
 		return posComma;
 	}
 	
-	public void writter(TreeMap<String, Event> eventMap) {
+	public void writer(TreeMap<String, Event> eventMap) {
 		File fileOut = new File(getPath(fileName));
 //		File fileIn = new File(path);
 //		File file = new File("calendarData/user.csv");
@@ -99,6 +97,7 @@ public class CsvHandler {
 				Event event = eventMap.get(date);
 				String line = String.format("%s,%s,%s,%s,%s", date, event.getEventTitle(), event.getEventDesc(), event.getStartTime().getTimeValue(), event.getEndTime().getTimeValue());
 				fout.println(line);
+//				System.out.println("Writer debug: " + line); //debug
 			}
 			
 		} catch (FileNotFoundException ex2) {
@@ -110,9 +109,9 @@ public class CsvHandler {
 		return String.format("calendarData/%s.csv", fileName);
 	}
 	
-	public String getPath(String fileName, boolean tmp) {
-		return String.format("calendarData/%sTMP.csv", fileName);
-	}
+//	public String getPath(String fileName, boolean tmp) {
+//		return String.format("calendarData/%sTMP.csv", fileName);
+//	}
 	
 	public void copyFile(File source, File target) {
 		try(Scanner in = new Scanner(source);

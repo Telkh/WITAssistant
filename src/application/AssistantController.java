@@ -1,5 +1,6 @@
 package application;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,4 +16,11 @@ public class AssistantController {
 	@FXML private Button btnSubmit;
 	@FXML private TextFlow textFlowOutput;
 
+	static String message;
+	
+	public void ClickMe() {
+		message = tfInput.getText();
+		String command = Command.commandTerm(message);
+		tfInput.setText(command);
+	}
 }

@@ -12,7 +12,8 @@ public class ClassRow extends HBox{
 	private ComboBox gradeOptions;
 	private TextField tfCredits;
 	private final String [] GRADE = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"}; //grades
-
+	GPA gpa = new GPA();
+	
 	public ClassRow() {
 		tfCourseName= new TextField();
 		tfCredits = new TextField();
@@ -28,6 +29,7 @@ public class ClassRow extends HBox{
 		super.setAlignment(Pos.CENTER);
 		super.setSpacing(10);
 	}
+	
 	
 	
 	
