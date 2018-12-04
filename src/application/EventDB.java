@@ -19,8 +19,6 @@ public class EventDB {
 		}
 		else {
 			eventMap.put(keyValue, event);
-			//System.out.println("Received event:\n" + event.toString()); //debug
-			//CsvHandler.printMap(eventMap); //debug
 			addToCSV();
 		}
 		
@@ -38,7 +36,6 @@ public class EventDB {
 		eventHandler.reader(eventMap);
 		//CsvHandler.printMap(eventMap); //debug
 	}
-	
 	/**
 	 * Creates a CSV file with the data in the treeMap
 	 */
@@ -47,6 +44,7 @@ public class EventDB {
 	}
 /**
  * Gets all the events in a day
+<<<<<<< HEAD
  * @param dateToSearch
  * @return ArrayList with events.
  */
@@ -62,4 +60,5 @@ public class EventDB {
 		}
 		return dayEvents;
 	}
+
 }
