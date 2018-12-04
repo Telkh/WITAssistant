@@ -44,7 +44,6 @@ public class EventDB {
 	}
 /**
  * Gets all the events in a day
-<<<<<<< HEAD
  * @param dateToSearch
  * @return ArrayList with events.
  */
