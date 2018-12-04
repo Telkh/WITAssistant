@@ -33,6 +33,9 @@ public class AssistantController {
 	public void Browser() {
 		message = tfInput.getText();
 		String command = Command.commandTerm(message);
+		if (!(command.contains("https"))) {
+			tfInput.setText(command);
+		}
 		tfInput.setText("");
 		URI myURI = null;
 		try {
