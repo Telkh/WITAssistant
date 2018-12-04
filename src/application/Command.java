@@ -27,7 +27,7 @@ public class Command {
 	public static String commandTerm(String term) {
 		String newterm[];
 		newterm = term.split(" ", 1);
-		if (term.contains("~calender")) {
+		if (term.contains("~calendar")) {
 			return calendar();
 		}
 		if (term.contains("~faculty")) {
