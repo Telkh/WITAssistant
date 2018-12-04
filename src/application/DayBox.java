@@ -117,7 +117,7 @@ public class DayBox extends Group {
 	
 	public void getEvents() {
 
-		Collection <Event> eventList = EventDB.getEvents(EventTime.getDate());
+		Collection <Event> eventList = EventDB.getEvents(EventTime.getYear() + "/" + EventTime.getMonthNumber() + "/" + dayNum);
 		Iterator <Event> iterator = eventList.iterator();
 		while(iterator.hasNext()) {
 			Event tempEvent = iterator.next();
@@ -130,7 +130,8 @@ public class DayBox extends Group {
 		System.out.print("Drawing: " + eventTitle);
 		labelYPos += 25;
 		FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
-		Label eventLabel = new Label(eventTitle);
+		Label eventLabel = new Label("   •" + eventTitle);
+		eventLabel.setStyle("-fx-font: 14 arial");
 		double labelWidth = fontLoader.computeStringWidth(eventLabel.getText(), eventLabel.getFont());
 		eventLabel.setLayoutY(labelYPos);
 		getChildren().add(eventLabel);
@@ -144,7 +145,6 @@ public class DayBox extends Group {
 	}
 
 	public boolean isInMinusBounds(double x, double y) {
-		
 		return false;
 	}
 	
