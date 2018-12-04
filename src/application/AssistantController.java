@@ -1,6 +1,12 @@
 package application;
 
-import javafx.event.EventHandler;
+
+
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,9 +24,30 @@ public class AssistantController {
 
 	static String message;
 	
-	public void ClickMe() {
+	public void Submit() {
 		message = tfInput.getText();
 		String command = Command.commandTerm(message);
 		tfInput.setText(command);
+	}
+	
+	public void Browser() {
+		message = tfInput.getText();
+		String command = Command.commandTerm(message);
+		tfInput.setText("");
+		URI myURI = null;
+		try {
+			myURI = new URI(command);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		try {
+			Desktop.getDesktop().browse(myURI);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void Reset() {
+		tfInput.setText("");
 	}
 }

@@ -28,7 +28,7 @@ public class Command {
 		String newterm[];
 		newterm = term.split(" ", 1);
 		if (term.contains("~calender")) {
-			return calender();
+			return calendar();
 		}
 		if (term.contains("~faculty")) {
 			if (newterm.length == 1) {
@@ -52,7 +52,7 @@ public class Command {
 		return null;
 	}
 	
-	public static String calender() {
+	public static String calendar() {
 		return "https://wit.edu/calendar";
 	}
 	public static String faculty(String message) {
@@ -131,7 +131,7 @@ public class Command {
 	return "https://wit.edu/search/" + message;
 	}
 	public static String help() {
-		return "Commands: help, about, search(term), faculty(name), calender";
+		return "Commands: help, about, search(term), faculty(name), calendar";
 	}
 	public static String about() {
 		return "This assistant is to help access various parts of the Wentworth Website with ease";
