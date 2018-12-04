@@ -3,16 +3,17 @@ package csvHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 import application.Event;
 import application.EventTime;
+import gpaCalculator.GPA;
 
 public class CsvHandler {
 	String fileName;
 	int numColumns = 5;
-	int DATE = 0;
 	String readError = String.format("The path '%s' is invalid. Refer to 'csvHandler/CSVhandler'.", getPath(fileName));
 	
 	
@@ -38,6 +39,23 @@ public class CsvHandler {
 //		printMap(events); //debug
 		return events;
 	}
+	
+	public ArrayList<GPA> gpaReader(ArrayList<GPA> myGPA){
+		File fileIn = new File(getPath(fileName));
+		try (Scanner in = new Scanner(fileIn)){
+			String line = addComma(in.nextLine());//add a comma to the end of the line
+			System.out.println(line); //debug
+			myGPA.add(new GPA(getData(line, 0), getData(line, 1), Integer.parseInt(getData(line, 2))));
+			
+		} catch (FileNotFoundException e) {
+			System.out.println(readError);
+			System.exit(1);
+		}
+		return myGPA;
+	}
+	
+	 
+	
 	public static void printMap(TreeMap<String, Event> map){
 		System.out .println("Events: ");
 		for(String date: map.keySet()){
@@ -105,6 +123,19 @@ public class CsvHandler {
 			System.exit(2);
 		}
 	}
+	
+	public void GPAwriter(ArrayList<GPA> myGPA) {
+		File fileOut = new File(getPath(fileName));
+		try(PrintWriter fout = new PrintWriter(fileOut)){
+			for (int i = 0; i < myGPA.size(); i++) {
+				String line = String.format("%s,%s,%d", myGPA.get(i).getCourse(), myGPA.get(i).getGrade(), myGPA.get(i).getCredits());
+			}
+		} catch (FileNotFoundException ex2) {
+			System.out.println("File unable to write");
+			System.exit(2);
+		}
+	}
+	
 	public String getPath(String fileName) {
 		return String.format("calendarData/%s.csv", fileName);
 	}
