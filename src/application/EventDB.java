@@ -19,8 +19,6 @@ public class EventDB {
 		}
 		else {
 			eventMap.put(keyValue, event);
-			//System.out.println("Received event:\n" + event.toString()); //debug
-			//CsvHandler.printMap(eventMap); //debug
 			addToCSV();
 		}
 		
@@ -42,25 +40,24 @@ public class EventDB {
 	 * Creates a CSV file with the data in the treeMap
 	 */
 	private static void addToCSV() {
-		eventHandler.writter(eventMap);
+		eventHandler.writer(eventMap);
 	}
 /**
  * Gets all the events in a day
- * @param date
+ * @param dateToSearch
  * @return ArrayList with events.
  */
-	public static ArrayList<Event> getEvents(String date) {
+	public static ArrayList<Event> getEvents(String dateToSearch) {
 		ArrayList<Event> dayEvents = new ArrayList<>(); //Creates arrayList
 		for(String key: eventMap.keySet()) { //loops trough all the keys.
 			Event  event = eventMap.get(key); //create Event object to pass in the ArrayList
-			if(key.contains(date)) { // if the key contains the date. Add to ArrayList
+			int dashIndex = key.indexOf("-"); // Finds index of character '-' in key
+			String currentDate = key.substring(0,dashIndex); // Stores date of entry in TreeMap
+			if(currentDate.equals(dateToSearch)) { // if the key contains the date. Add to ArrayList
 				dayEvents.add(event);
 			}
 		}
-		
 		return dayEvents;
 	}
-
-	
 
 }

@@ -36,20 +36,21 @@ public class EventFormController {
     @FXML private Label lblWarning;
     
 	private Stage stage = new Stage();
-	private Event event = new Event();
+	private static Event event;
 	private boolean [] isFilled = new boolean[6];
-	
+	private boolean daySelected;
 	public void initialize() {
-		anchorPane.disabledProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				
-			}
-		});
 		
-		System.out.println("EventFromController Initialized");
-		
+		/*System.out.println("EventFromController Initialized");
+		if(event.getEventDate().equals("00/00/0000")) {
+			lblPrompt.setText("No Day Selected");
+			daySelected = false;
+		}
+		else {
+			lblPrompt.setText("Add Event for " + event.getEventDate());
+		}*/
 		lblPrompt.setText("Add Event for " + EventTime.getDate());
+		event = new Event();
 		lblWarning.setVisible(false);
 		for(int i = 1; i <= 24; i++) {
 			startHour.getItems().add(Integer.toString(i));
@@ -70,9 +71,10 @@ public class EventFormController {
 	}
 
 	public void setEvent() {
+		
 		tfTitle.textProperty().addListener((obs, oldval, newval) -> {
 			isFilled[0] = true;
-			event.setEventTitle(newval);
+				event.setEventTitle(newval);
 		});
 		
 		tfDesc.textProperty().addListener((obs, oldval, newval) -> {
@@ -83,36 +85,49 @@ public class EventFormController {
 		event.setEventDate(EventTime.getDateKeyFormat()); //sets date
 		
 		startHour.getSelectionModel().selectedItemProperty().addListener((options, oldval, newval) -> {
-			isFilled[2] = true;
-			event.getStartTime().setHour(newval);
+			if(newval != null) {
+				isFilled[2] = true;
+				event.getStartTime().setHour(newval);
+			}
 		});
 		
 		startMin.getSelectionModel().selectedItemProperty().addListener((options, oldval, newval) -> {
-			isFilled[3] = true;
-			event.getStartTime().setMinutes(newval);
+			if(newval != null) {
+				isFilled[3] = true;
+				event.getStartTime().setMinutes(newval);
+			}
 		});
 		
 		endHour.getSelectionModel().selectedItemProperty().addListener((options, oldval, newval) -> {
-			isFilled[4] = true;
-			event.getEndTime().setHour(newval);
+			if(newval != null) {
+				isFilled[4] = true;
+				event.getEndTime().setHour(newval);
+			}
 		});
 		
 		endMin.getSelectionModel().selectedItemProperty().addListener((options, oldval, newval) -> {
-			isFilled[5] = true;
-			event.getEndTime().setMinutes(newval);
+			if(newval != null) {
+				isFilled[5] = true;
+				event.getEndTime().setMinutes(newval);
+			}
 		});
 	}
 	
 	public void addToDB() {
 		if(allFieldsFilled()) {
-			System.out.println("Adding to DB");
+			removeCommas();
+			System.out.println("Adding to DB " + event);
 			EventDB.addToEventDB(event.generateKey(), event);
-			System.out.println(event.toString());
+			System.out.println(event.generateKey());
 			clearInput();
 		}
 		else {
 			lblWarning.setVisible(true);
 		}
+	}
+	
+	private void removeCommas() {
+		
 	}
 	
 	private boolean allFieldsFilled() {
@@ -121,41 +136,31 @@ public class EventFormController {
 				return false;
 			}
 		}
-		return true;
-	}
-
-	public Event getEvent() {
-		return event;
-	}
-	
-	public void resumeInput() {
-		lblPrompt.setText("Add Event for " + EventTime.getDate());
-	}
-	
-	public void pauseInput() {
-		System.out.println("Pausing");
-		lblPrompt.setText(lblPrompt.getText() + ": Paused");
+		return true;	
 	}
 	
 	public void clearInput() {
-
-		//cancelRequested = true;
-		if(!allFieldsFilled()) {
-			lblWarning.setVisible(false);	
+		if(lblWarning.isVisible()) {
+			lblWarning.setVisible(false);
 		}
-		//anchorPane.getParent().setDisable(true);
+		for(int i = 0; i < isFilled.length; i++) {
+			isFilled[i] = false;
+		}
+		
+		/*startHour.getSelectionModel().clearSelection();
+		startMin.getSelectionModel().clearSelection();
+		endHour.getSelectionModel().clearSelection();
+		endMin.getSelectionModel().clearSelection();*/
+		anchorPane.setDisable(true);
+	}
 	
+	public static void setDate(String date) {
+		event.setEventDate(date);
+		System.out.println("Setting date in form controller " + event.getEventDate());
 	}
 	
 	public void cancel() {
 		clearInput();
-		
-		if(!allFieldsFilled()) {
-			lblWarning.setVisible(false);	
-		}
-		tfTitle.clear();
-		tfDesc.clear();
-		//startMin.setValue(startMin.getPromptText());
 	}
 	
 }

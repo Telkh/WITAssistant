@@ -7,7 +7,6 @@ public class Event {
 	private String eventDate;
 	private EventTime startTime;
 	private EventTime endTime;
-	private boolean isAllDay;
 	
 	public Event(String title, String description, String date, EventTime start, EventTime end) {
 		eventDate = date;
@@ -15,7 +14,6 @@ public class Event {
 		eventDesc = description;
 		startTime = start;
 		endTime = end;
-		isAllDay = false;
 	}
 	
 	public Event() {
@@ -66,14 +64,6 @@ public class Event {
 		this.endTime = endTime;
 	}
 
-	public boolean isAllDay() {
-		return isAllDay;
-	}
-
-	public void setAllDay(boolean isAllDay) {
-		this.isAllDay = isAllDay;
-	}
-
 	public String toString() {
 		String output = String.format("Title: %s%nDescription: %s%nStart time: %s  End Time: %s", eventTitle, eventDesc, startTime.getTimeValue(), endTime.getTimeValue());
 		return output;
@@ -84,6 +74,7 @@ public class Event {
 	 * @return key
 	 */
 	public String generateKey() {
+		System.out.println("In Event Class: " + this.eventDate);
 		String key = String.format("%s-%s", this.eventDate, this.startTime.getTimeValue());
 		return key;
 	}

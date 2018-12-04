@@ -61,7 +61,6 @@ public class Command {
 		}
 		
 		message = message.substring(9);
-		
 		if (message.contains(" ")) {
 			try {
 				Document doc = Jsoup.connect("https://wit.edu/wentworth-directory?name=" + message + "&field_colleges_target_id=All&field_department_target_id=All").get();
@@ -99,7 +98,6 @@ public class Command {
 		}
 		
 		message = message.substring(8);
-		
 		if (message.contains(" ")) {
 			try {
 				Document doc = Jsoup.connect("https://wit.edu/search/" + message).get();

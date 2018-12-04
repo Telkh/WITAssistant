@@ -17,8 +17,7 @@ public class CsvHandler {
 	
 	
 	public CsvHandler(String fileName){
-		this.fileName = fileName;
-		
+		this.fileName = fileName;	
 	}
 	
 	public TreeMap<String, Event> reader(TreeMap<String, Event> events) {
@@ -48,7 +47,7 @@ public class CsvHandler {
 		System.out .println();
 		}
 	/**
-	 * Adds a coma to the end of a string.
+	 * Adds a comma to the end of a string.
 	 * @param line
 	 * @return
 	 */
@@ -89,7 +88,7 @@ public class CsvHandler {
 		return posComma;
 	}
 	
-	public void writter(TreeMap<String, Event> eventMap) {
+	public void writer(TreeMap<String, Event> eventMap) {
 		File fileOut = new File(getPath(fileName));
 //		File fileIn = new File(path);
 //		File file = new File("calendarData/user.csv");

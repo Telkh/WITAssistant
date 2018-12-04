@@ -11,6 +11,7 @@ import com.sun.javafx.tk.Toolkit;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -18,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -67,6 +69,20 @@ public class DayBox extends Group {
 			minusImage.setX(newval.getWidth() - (minusImage.getFitWidth() + 10));
 			minusImage.setY(plusImage.getY() + 40);
 		});
+		
+		super.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				deselectDayBox();
+			}
+		});
+		
+		super.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				selectDayBox();
+			}
+		});
 	}
 	
 	// Width getter
@@ -105,11 +121,13 @@ public class DayBox extends Group {
 		Iterator <Event> iterator = eventList.iterator();
 		while(iterator.hasNext()) {
 			Event tempEvent = iterator.next();
+			System.out.println("Event: " + tempEvent);
 			drawEventLabel(tempEvent.getEventTitle());
 		}
 	}
 	
 	private void drawEventLabel(String eventTitle) {
+		System.out.print("Drawing: " + eventTitle);
 		labelYPos += 25;
 		FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
 		Label eventLabel = new Label(eventTitle);
@@ -151,6 +169,7 @@ public class DayBox extends Group {
 		}
 	}
 	
+
 	public int getDay() {
 		return dayNum;
 	}

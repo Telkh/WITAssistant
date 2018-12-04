@@ -6,7 +6,7 @@ import java.util.HashMap;
 // TODO: Ask if it makes sense in terms of organization to have static methods along with object methods in same class
 
 
-public class EventTime implements Comparable, CurrentTime {
+public class EventTime implements CurrentTime {
 	private int hour;
 	private int minute;
 
@@ -188,12 +188,4 @@ public class EventTime implements Comparable, CurrentTime {
 		currentDate = String.format("%d/%d/%d", currentYear, currentMonth, currentDay); 
 		return currentDate;
 	}
-	
-	@Override
-	public int compareTo(Object arg0) {
-		return 0;
-	}
-	
-	
-	
 }

@@ -53,11 +53,10 @@ public class AnchorPaneController {
 				DayBox dayBox = new DayBox(counter); 
 				dayBox.widthProperty().bind(leftSection.widthProperty().divide(7.1));
 				dayBox.heightProperty().bind(leftSection.heightProperty().divide(6));
-				setDayProperties(dayBox);
-				if(EventDB.containsAtDate(EventTime.getDate())) {
-					dayBox.getEvents();
-				}
+				
+				dayBox.getEvents();
 				rowContainer.getChildren().add(dayBox);
+				setDayProperties(dayBox);
 			}
 			vContainer.getChildren().add(rowContainer);
 			rowContainer = new HBox();
@@ -65,41 +64,21 @@ public class AnchorPaneController {
 	}
 	
 	public void setDayProperties(DayBox dayBox) {
-		
 		dayBox.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				
-				EventTime.setDay(dayBox.getDay()); // Set current day to day selected by user	
-				System.out.println(EventTime.getDate() + " " + dayBox.getDay());
+				EventTime.setDay(dayBox.getDay());
 				if(dayBox.isInPlusBounds(event.getX(), event.getY())) {
+					
 					try {
 						addEventPanel = fxmlLoader.load(getClass().getResource("EventForm.fxml"));
 						tabAddEvent.setContent(addEventPanel);
-									} catch (IOException e) {
+						
+					} catch (IOException e) {
 						e.printStackTrace();
-					}
+					}		
 					selectionModel.select(2);
-
-
 				}
-				else {
-					addEventPanel.setDisable(true);
-				}
-			}
-		});
-		
-		dayBox.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				dayBox.deselectDayBox();
-			}
-		});
-		
-		dayBox.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				dayBox.selectDayBox();
 			}
 		});
 	}
@@ -131,15 +110,7 @@ public class AnchorPaneController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		rightSection.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				int index = selectionModel.getSelectedIndex();
-				rightSection.getTabs().get(index).getContent().setDisable(false);
-			}
-			
-		});
+		addEventPanel.setDisable(true);
 		tabAssistant.setContent(assistantPanel);
 		tabCalc.setContent(calcPanel);
 		tabAddEvent.setContent(addEventPanel);
