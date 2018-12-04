@@ -19,9 +19,11 @@
                </font>
             </Label>
             <TextField fx:id="tfInput" />
-            <HBox fx:id="hContainer" alignment="CENTER" prefHeight="28.0" prefWidth="600.0">
+            <HBox fx:id="hContainer" alignment="CENTER" prefHeight="28.0" prefWidth="600.0" spacing="10.0">
                <children>
-                  <Button fx:id="btnSubmit" mnemonicParsing="false" text="Submit" onAction ="#Submit"/>
+                  <Button fx:id="btnReset" mnemonicParsing="false" text="Reset" />
+                  <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#Submit" text="Submit" />
+                  <Button fx:id="btnGoToPage" mnemonicParsing="false" text="Go To Page" />
                </children>
             </HBox>
             <TextFlow fx:id="textFlowOutput" prefHeight="351.0" prefWidth="600.0" />

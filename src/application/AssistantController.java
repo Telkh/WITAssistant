@@ -21,7 +21,8 @@ public class AssistantController {
 	@FXML private HBox hContainer;
 	@FXML private Button btnSubmit;
 	@FXML private TextFlow textFlowOutput;
-
+	@FXML private Button btnReset;
+	@FXML private Button btnGoToPage;
 	static String message;
 	
 	public void Submit() {
