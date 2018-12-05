@@ -11,22 +11,26 @@ public class ClassRow extends HBox{
 	private TextField tfCourseName;
 	private ComboBox gradeOptions;
 	private TextField tfCredits;
+	public static TextField gpa;
 	private final String [] GRADE = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"}; //grades
 	private boolean [] isFilled = new boolean[3];
-	GPA gpa = new GPA();
+	
 	
 	public ClassRow() {
 		tfCourseName= new TextField();
 		tfCredits = new TextField();
 		gradeOptions = new ComboBox();
+		gpa = new TextField();
 		
 		tfCourseName.setPromptText("Course Name");
 		tfCredits.setPromptText("Credits");
 		gradeOptions.promptTextProperty().set("Grade");
+		
 		for(int i = 0; i < GRADE.length; i++) {
 			gradeOptions.getItems().add(GRADE[i]);
 		}
 		super.getChildren().addAll(tfCourseName, gradeOptions, tfCredits);
+		
 		super.setAlignment(Pos.CENTER);
 		super.setSpacing(10);
 		setProperties();
@@ -77,6 +81,8 @@ public class ClassRow extends HBox{
 		}
 		return -1;
 	}
+	
+	
 	
 	public String toString() {
 		return(getName() + " " + getGrade() + " " + getCredits());

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CalculatorController">
    <children>
       <HBox fx:id="topSection" alignment="CENTER" layoutX="82.0" prefHeight="70.0" prefWidth="600.0" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -19,7 +22,18 @@
       </HBox>
       <HBox fx:id="lowerSection" alignment="CENTER" layoutX="36.0" layoutY="336.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="350.0">
          <children>
-            <Button fx:id="btnSubmit" mnemonicParsing="false" text="Submit" />
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="65.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="gpa" editable="false" style="-fx-alignment: center;" />
+                  <Button fx:id="btnSubmit" mnemonicParsing="false" text="Submit" />
+               </children>
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
          </children>
       </HBox>
       <VBox fx:id="vBoxForm" alignment="TOP_RIGHT" layoutX="222.0" layoutY="70.0" prefHeight="200.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />

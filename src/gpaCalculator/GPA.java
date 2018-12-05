@@ -11,13 +11,13 @@ import java.util.ArrayList;
  */
 public class GPA {
 	private final String[] GRADE = { "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F" }; // grades
-	private double[] weight = new double[GRADE.length]; // weight of letter grades
+	private double[] weight = {4, 3.67, 3.33, 3, 2.67, 2.33, 2, 1.67, 1.33, 1, 0};//new double[GRADE.length]; // weight of letter grades
 	private String course;
 	private String grade;
 	private int credits;
 
 	public GPA(String course, String grade, int credits) {
-		generateValue();
+		//generateValue();
 		this.course = course;
 		this.grade = grade;
 		this.credits = credits;
@@ -26,7 +26,7 @@ public class GPA {
 
 	// Getters and setters
 	public GPA() {
-		generateValue();
+		//generateValue();
 	}
 
 	public String getGrade() {
@@ -115,5 +115,7 @@ public class GPA {
 		double average = sum / sumCredits(courses); // average points / sum of credits.
 		return average;
 	}
+	
+	
 
 }

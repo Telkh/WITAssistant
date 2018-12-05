@@ -129,14 +129,20 @@ public class CsvHandler {
 		try(PrintWriter fout = new PrintWriter(fileOut)){
 			for (int i = 0; i < myGPA.size(); i++) {
 				String line = String.format("%s,%s,%d", myGPA.get(i).getCourse(), myGPA.get(i).getGrade(), myGPA.get(i).getCredits());
+				fout.println(line);
+				System.out.println("Writer debug: " + line); //debug
 			}
 		} catch (FileNotFoundException ex2) {
 			System.out.println("File unable to write");
 			System.exit(2);
 		}
 	}
-	
-	public String getPath(String fileName) {
+	/**
+	 * add folder and extension to filename
+	 * @param fileName
+	 * @return
+	 */
+	private String getPath(String fileName) {
 		return String.format("calendarData/%s.csv", fileName);
 	}
 	
