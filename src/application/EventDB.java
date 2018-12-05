@@ -3,11 +3,15 @@ package application;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import csvHandler.CsvHandler;
-
+/**
+ * Handles the event dataBase
+ * Add events to CSV file
+ * Reads events from CSV file
+ */
 public class EventDB {
 
-	private static TreeMap <String, Event> eventMap = new TreeMap <String, Event>();
-	static CsvHandler eventHandler = new CsvHandler("userData");
+	private static TreeMap <String, Event> eventMap = new TreeMap <String, Event>(); //main event data holder
+	static CsvHandler eventHandler = new CsvHandler("userData"); //creates CSV handler object. Enables reading and writitng of events.
 	public EventDB() {
 		loadFromCSV();
 	}
@@ -31,7 +35,7 @@ public class EventDB {
 		return false;
 	}
 	
-	// Load all information from CSV into HashMap
+	// Load all information from CSV into TreeMap
 	public static void loadFromCSV() {
 		eventHandler.reader(eventMap);
 		//CsvHandler.printMap(eventMap); //debug

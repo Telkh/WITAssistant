@@ -112,13 +112,14 @@ public class EventFormController {
 			}
 		});
 	}
-	
+	/**
+	 * adds event gathered to DB
+	 */
 	public void addToDB() {
 		if(allFieldsFilled()) {
-			removeCommas();
-			System.out.println("Adding to DB " + event);
 			EventDB.addToEventDB(event.generateKey(), event);
-			System.out.println(event.generateKey());
+			//System.out.println("Event Controller - Adding to DB: " + event); //debug
+			//System.out.println(event.generateKey()); //debug
 			clearInput();
 		}
 		else {
@@ -126,9 +127,7 @@ public class EventFormController {
 		}
 	}
 	
-	private void removeCommas() {
-		
-	}
+	
 	
 	private boolean allFieldsFilled() {
 		for(int i = 0; i < isFilled.length; i++) {
