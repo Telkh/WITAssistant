@@ -27,8 +27,10 @@ public class AssistantController {
 	
 	public void Submit() {
 		message = tfInput.getText();
-		String command = Command.commandTerm(message);
-		tfInput.setText(command);
+		if(!message.equals("")) {
+			String command = Command.commandTerm(message);
+			tfInput.setText(command);
+		}
 	}
 	
 	public void Browser() {
