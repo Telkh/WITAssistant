@@ -46,7 +46,6 @@ public class CsvHandler {
 		try (Scanner in = new Scanner(fileIn)) { // try to read the file
 			while (in.hasNextLine()) {
 				String line = addComma(in.nextLine());// add a comma to the end of the line
-				// System.out.println("CSVtoMap: "line); //debug
 				// add elements to the map
 				// key, title, description, start time, end time
 				events.put(getData(line, 0), new Event(getData(line, 1), getData(line, 2), getData(line, 0),
@@ -56,7 +55,6 @@ public class CsvHandler {
 			System.out.println(readError);
 			System.exit(1);
 		}
-//		printMap(events); //debug
 		return events;
 	}
 
@@ -70,7 +68,6 @@ public class CsvHandler {
 		File fileIn = new File(getPath(fileName));
 		try (Scanner in = new Scanner(fileIn)) {
 			String line = addComma(in.nextLine());// add a comma to the end of the line
-			// System.out.println("CSV to ArrayList:" + line); //debug
 			// add elements to arrayList in the format Course, grade, credits
 			myGPA.add(new GPA(getData(line, 0), getData(line, 1), Integer.parseInt(getData(line, 2))));
 
@@ -82,7 +79,7 @@ public class CsvHandler {
 	}
 	
 	/**
-	 * Writes Tremap to CSV file.
+	 * Writes Treemap to CSV file.
 	 * @param eventMap
 	 */
 	public void writer(TreeMap<String, Event> eventMap) {
@@ -94,7 +91,6 @@ public class CsvHandler {
 				String line = String.format("%s,%s,%s,%s,%s", date, event.getEventTitle(), event.getEventDesc(),
 						event.getStartTime().getTimeValue(), event.getEndTime().getTimeValue());
 				fout.println(line);
-//				System.out.println("Writer debug: " + line); //debug
 			}
 
 		} catch (FileNotFoundException ex2) {
@@ -115,7 +111,6 @@ public class CsvHandler {
 				String line = String.format("%s,%s,%d", myGPA.get(i).getCourse(), myGPA.get(i).getGrade(),
 						myGPA.get(i).getCredits());
 				fout.println(line);
-				//System.out.println("Writer debug: " + line); // debug
 			}
 		} catch (FileNotFoundException ex2) {
 			System.out.println("File unable to write GPA");

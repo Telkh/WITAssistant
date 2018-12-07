@@ -1,19 +1,11 @@
 package application;
 
-import java.io.IOException;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -34,21 +26,10 @@ public class EventFormController {
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
     @FXML private Label lblWarning;
-    
-	private Stage stage = new Stage();
 	private static Event event;
 	private boolean [] isFilled = new boolean[6];
-	private boolean daySelected;
+	
 	public void initialize() {
-		
-		/*System.out.println("EventFromController Initialized");
-		if(event.getEventDate().equals("00/00/0000")) {
-			lblPrompt.setText("No Day Selected");
-			daySelected = false;
-		}
-		else {
-			lblPrompt.setText("Add Event for " + event.getEventDate());
-		}*/
 		lblPrompt.setText("Add Event for " + EventTime.getDate());
 		event = new Event();
 		lblWarning.setVisible(false);
@@ -56,7 +37,6 @@ public class EventFormController {
 			startHour.getItems().add(Integer.toString(i));
 			endHour.getItems().add(Integer.toString(i));
 		}
-		
 		for(int j = 0; j <= 59; j++) {
 			if(j <= 9) {
 				startMin.getItems().add("0" + j);
@@ -69,7 +49,11 @@ public class EventFormController {
 		}
 		setEvent();
 	}
-
+	
+	/*
+	 * Updates Event object's properties whenever the user enters
+	 * or changes information.
+	 */
 	public void setEvent() {
 		
 		tfTitle.textProperty().addListener((obs, oldval, newval) -> {
@@ -118,17 +102,15 @@ public class EventFormController {
 	public void addToDB() {
 		if(allFieldsFilled()) {
 			EventDB.addToEventDB(event.generateKey(), event);
-			//System.out.println("Event Controller - Adding to DB: " + event); //debug
-			//System.out.println(event.generateKey()); //debug
 			clearInput();
 		}
 		else {
 			lblWarning.setVisible(true);
 		}
 	}
-	
-	
-	
+	/*
+	 * Returns true if all of the form fields have been filled
+	 */
 	private boolean allFieldsFilled() {
 		for(int i = 0; i < isFilled.length; i++) {
 			if(!isFilled[i]) {
@@ -138,6 +120,10 @@ public class EventFormController {
 		return true;	
 	}
 	
+	/*
+	 * Disables the form when the user submits information or cancels
+	 * Resets isFilled array
+	 */
 	public void clearInput() {
 		if(lblWarning.isVisible()) {
 			lblWarning.setVisible(false);
@@ -145,19 +131,11 @@ public class EventFormController {
 		for(int i = 0; i < isFilled.length; i++) {
 			isFilled[i] = false;
 		}
-		
-		/*startHour.getSelectionModel().clearSelection();
-		startMin.getSelectionModel().clearSelection();
-		endHour.getSelectionModel().clearSelection();
-		endMin.getSelectionModel().clearSelection();*/
 		anchorPane.setDisable(true);
 	}
-	
-	public static void setDate(String date) {
-		event.setEventDate(date);
-		System.out.println("Setting date in form controller " + event.getEventDate());
-	}
-	
+	/*
+	 * Action for cancel button
+	 */
 	public void cancel() {
 		clearInput();
 	}

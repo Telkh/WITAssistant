@@ -16,18 +16,19 @@ public class EventDB {
 		loadFromCSV();
 	}
 	
+	/*
+	 * Adds Event object to TreeMap if there no value is attached to key
+	 */
 	public static void addToEventDB(String keyValue, Event event) {
-		if(eventMap.containsKey(keyValue)) {
-			System.out.println("EventDB already contains data on date " + keyValue);
-			System.out.println(eventMap.get(keyValue).toString());
-		}
-		else {
+		if(!eventMap.containsKey(keyValue)) {
 			eventMap.put(keyValue, event);
 			addToCSV();
 		}
-		
 	}
 	
+	/*
+	 * Returns true if there is a value attached to key
+	 */
 	public static boolean containsAtDate(String keyValue) {
 		if(eventMap.containsKey(keyValue)) {
 			return true;
@@ -38,7 +39,6 @@ public class EventDB {
 	// Load all information from CSV into TreeMap
 	public static void loadFromCSV() {
 		eventHandler.reader(eventMap);
-		//CsvHandler.printMap(eventMap); //debug
 	}
 	/**
 	 * Creates a CSV file with the data in the treeMap
@@ -63,5 +63,4 @@ public class EventDB {
 		}
 		return dayEvents;
 	}
-
 }

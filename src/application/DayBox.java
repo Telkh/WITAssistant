@@ -1,27 +1,17 @@
 package application;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Scanner;
-
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
-
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -30,7 +20,6 @@ public class DayBox extends Group {
 	
 	private int dayNum = 0;
 	private ImageView plusImage;
-	private ImageView minusImage;
 	private Label dayLabel;
 	private Rectangle calBox;
 	private int labelYPos = 0;
@@ -43,16 +32,9 @@ public class DayBox extends Group {
 		widthProperty = calBox.widthProperty();
 		heightProperty = calBox.heightProperty();
 		plusImage = new ImageView();
-		minusImage = new ImageView();
 		plusImage.setImage(new Image("application\\PlusIcon.png"));
-		minusImage.setImage(new Image("application\\MinusIcon.png"));
-	
 		plusImage.setFitWidth(30);
 		plusImage.setFitHeight(30);
-		
-		minusImage.setFitWidth(30);
-		minusImage.setFitHeight(30);
-		
 		deselectDayBox();
 		calBox.setStroke(Color.GRAY);
 		calBox.setStrokeWidth(.2);
@@ -61,15 +43,12 @@ public class DayBox extends Group {
 		dayLabel.setLayoutX(5);	
 		dayLabel.setLayoutY(5);
 		dayLabel.setFont(Font.font(16));
-		getChildren().addAll(calBox,dayLabel, plusImage, minusImage);
+		getChildren().addAll(calBox,dayLabel, plusImage);
 		EventTime.setDay(day);
 		calBox.layoutBoundsProperty().addListener((obs, oldval, newval) -> {
 			plusImage.setX(newval.getWidth() - (plusImage.getFitWidth() + 10));
 			plusImage.setY(plusImage.getFitHeight() - 20);
-			minusImage.setX(newval.getWidth() - (minusImage.getFitWidth() + 10));
-			minusImage.setY(plusImage.getY() + 40);
 		});
-		
 		super.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -115,8 +94,10 @@ public class DayBox extends Group {
 		return heightProperty;
 	}
 	
+	/*
+	 * 
+	 */
 	public void getEvents() {
-
 		Collection <Event> eventList = EventDB.getEvents(EventTime.getYear() + "/" + EventTime.getMonthNumber() + "/" + dayNum);
 		Iterator <Event> iterator = eventList.iterator();
 		while(iterator.hasNext()) {
@@ -129,10 +110,8 @@ public class DayBox extends Group {
 	private void drawEventLabel(String eventTitle) {
 		System.out.print("Drawing: " + eventTitle);
 		labelYPos += 25;
-		FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
 		Label eventLabel = new Label("   •" + eventTitle);
 		eventLabel.setStyle("-fx-font: 14 arial");
-		double labelWidth = fontLoader.computeStringWidth(eventLabel.getText(), eventLabel.getFont());
 		eventLabel.setLayoutY(labelYPos);
 		getChildren().add(eventLabel);
 	}
@@ -150,18 +129,15 @@ public class DayBox extends Group {
 	
 	public void selectDayBox() {
 		plusImage.setVisible(true);
-		minusImage.setVisible(true);
 		calBox.setStrokeWidth(2);
 	}
 	
 	public void deselectDayBox() {
 		plusImage.setVisible(false);
-		minusImage.setVisible(false);
 		calBox.setStrokeWidth(.2);
 	}
 	
 	public void drawEvents(ArrayList<Event> eventList) {
-		String eventTitle = "";
 		Event tempEvent;
 		for(int i = 0; i < eventList.size(); i++) {
 			tempEvent = eventList.get(i);
@@ -169,7 +145,6 @@ public class DayBox extends Group {
 		}
 	}
 	
-
 	public int getDay() {
 		return dayNum;
 	}

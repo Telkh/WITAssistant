@@ -7,22 +7,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-//import java.util.HashMap;
 
 public class Command {
-	//static HashMap<String, Runnable> hmap;
-	
-	/*public Command() {
-		Command.hmap = new HashMap<String, Runnable>() {
-			{
-				put("~calender", () -> calender());
-			    put("~faculty", () -> faculty(AssistantController.message));
-			    put("~search", () -> search(AssistantController.message));
-			    put("~help", () -> help(AssistantController.message));//utilize message for specific command help
-			    put("~about", () -> about());
-			}
-		};
-	}*/
 	
 	public static String commandTerm(String term) {
 		String newterm[];
