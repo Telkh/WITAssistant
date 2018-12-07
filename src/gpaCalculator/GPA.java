@@ -17,7 +17,6 @@ public class GPA {
 	private int credits;
 
 	public GPA(String course, String grade, int credits) {
-		//generateValue();
 		this.course = course;
 		this.grade = grade;
 		this.credits = credits;
@@ -26,7 +25,6 @@ public class GPA {
 
 	// Getters and setters
 	public GPA() {
-		//generateValue();
 	}
 
 	public String getGrade() {
@@ -53,17 +51,6 @@ public class GPA {
 		this.course = course;
 	}
 
-//Test
-	/*
-	 * Generates the weights of each letter grade
-	 */
-	void generateValue() {
-		weight[0] = 4.00; // Maximum points
-		final double diff = 0.3333; // difference between grades
-		for (int i = 1; i < weight.length; i++) {
-			weight[i] = weight[i - 1] - diff;
-		}
-	}
 
 	/**
 	 * Finds the total points earned in the course

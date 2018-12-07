@@ -1,12 +1,9 @@
 package application;
 
 import java.io.IOException;
-
-import gpaCalculator.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
@@ -19,7 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class AnchorPaneController {
+
+public class MainController {
 	
 	@FXML private SplitPane splitPane;
 	@FXML private AnchorPane leftSection;
@@ -36,10 +34,14 @@ public class AnchorPaneController {
 	@FXML private AnchorPane addEventPanel;
 	@FXML private Tab tabAssistant;
 	@FXML private AnchorPane assistantPanel;
-	
 	private FXMLLoader fxmlLoader = new FXMLLoader();
 	private SingleSelectionModel<Tab> selectionModel;
 	
+	/* 
+	 * Draws calendar grid using a nested for-loop. The inner loop populates an HBox container
+	 * with DayBox objects and binds their with and height with the HBox. The outer loop adds the previous
+	 * HBox to a VBox object and creates a new HBox object for the next row.
+	 */
 	public void drawCalendar() {
 		vContainer.getChildren().clear();
 		int counter = 0;
@@ -53,7 +55,6 @@ public class AnchorPaneController {
 				DayBox dayBox = new DayBox(counter); 
 				dayBox.widthProperty().bind(leftSection.widthProperty().divide(7.1));
 				dayBox.heightProperty().bind(leftSection.heightProperty().divide(6));
-				
 				dayBox.getEvents();
 				rowContainer.getChildren().add(dayBox);
 				setDayProperties(dayBox);
@@ -62,14 +63,17 @@ public class AnchorPaneController {
 			rowContainer = new HBox();
 		}
 	}
-	
+	/*
+	 * Defines the setOnMouseClicked action for each DayBox. When clicked, updates the current day
+	 * in EventTime class. If the plus-icon is clicked, the AddEvent tab is shown.
+	 * 
+	 */
 	public void setDayProperties(DayBox dayBox) {
 		dayBox.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
 				EventTime.setDay(dayBox.getDay());
 				if(dayBox.isInPlusBounds(event.getX(), event.getY())) {
-					
 					try {
 						addEventPanel = fxmlLoader.load(getClass().getResource("EventForm.fxml"));
 						tabAddEvent.setContent(addEventPanel);
@@ -82,23 +86,34 @@ public class AnchorPaneController {
 			}
 		});
 	}
-	
+	/*
+	 * Goes to next month, redraws calendar, and updates label
+	 */
 	public void nextButtonEvent() {
 		EventTime.nextMonth();
 		drawCalendar();
 		setDateLabel();
 	}
 	
+	/*
+	 * Goes to previous month, redraws calendar, and updates label
+	 */
 	public void previousButtonEvent() {
 		EventTime.previousMonth();
 		drawCalendar();
 		setDateLabel();
 	}
 	
+	/*
+	 * Sets label to current date in EventTime
+	 */
 	public void setDateLabel() {
 		currentDateLabel.setText(EventTime.getMonthName() + " " + EventTime.getYear());
 	}
-
+	
+	/*
+	 * Initializes calendar and TabPane
+	 */
 	public void initialize() {
 		selectionModel = rightSection.getSelectionModel();	
 		splitPane.setDividerPosition(0, .75);

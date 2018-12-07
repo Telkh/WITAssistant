@@ -3,27 +3,32 @@ package application;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import csvHandler.CsvHandler;
-
+/**
+ * Handles the event dataBase
+ * Add events to CSV file
+ * Reads events from CSV file
+ */
 public class EventDB {
 
-	private static TreeMap <String, Event> eventMap = new TreeMap <String, Event>();
-	static CsvHandler eventHandler = new CsvHandler("userData");
+	private static TreeMap <String, Event> eventMap = new TreeMap <String, Event>(); //main event data holder
+	static CsvHandler eventHandler = new CsvHandler("userData"); //creates CSV handler object. Enables reading and writitng of events.
 	public EventDB() {
 		loadFromCSV();
 	}
 	
+	/*
+	 * Adds Event object to TreeMap if there no value is attached to key
+	 */
 	public static void addToEventDB(String keyValue, Event event) {
-		if(eventMap.containsKey(keyValue)) {
-			System.out.println("EventDB already contains data on date " + keyValue);
-			System.out.println(eventMap.get(keyValue).toString());
-		}
-		else {
+		if(!eventMap.containsKey(keyValue)) {
 			eventMap.put(keyValue, event);
 			addToCSV();
 		}
-		
 	}
 	
+	/*
+	 * Returns true if there is a value attached to key
+	 */
 	public static boolean containsAtDate(String keyValue) {
 		if(eventMap.containsKey(keyValue)) {
 			return true;
@@ -31,10 +36,9 @@ public class EventDB {
 		return false;
 	}
 	
-	// Load all information from CSV into HashMap
+	// Load all information from CSV into TreeMap
 	public static void loadFromCSV() {
 		eventHandler.reader(eventMap);
-		//CsvHandler.printMap(eventMap); //debug
 	}
 	/**
 	 * Creates a CSV file with the data in the treeMap
@@ -59,5 +63,4 @@ public class EventDB {
 		}
 		return dayEvents;
 	}
-
 }

@@ -65,6 +65,11 @@ public class Event {
 	}
 
 	public String toString() {
+		/* Format:
+		Title:
+		Description:
+		Start time:  End time:
+		*/
 		String output = String.format("Title: %s%nDescription: %s%nStart time: %s  End Time: %s", eventTitle, eventDesc, startTime.getTimeValue(), endTime.getTimeValue());
 		return output;
 	}
@@ -74,7 +79,7 @@ public class Event {
 	 * @return key
 	 */
 	public String generateKey() {
-		System.out.println("In Event Class: " + this.eventDate);
+		//System.out.println("Event Class key debug: " + this.eventDate); //debug
 		String key = String.format("%s-%s", this.eventDate, this.startTime.getTimeValue());
 		return key;
 	}

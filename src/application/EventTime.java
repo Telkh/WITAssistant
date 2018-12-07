@@ -3,9 +3,6 @@ package application;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-// TODO: Ask if it makes sense in terms of organization to have static methods along with object methods in same class
-
-
 public class EventTime implements CurrentTime {
 	private int hour;
 	private int minute;
@@ -49,7 +46,6 @@ public class EventTime implements CurrentTime {
 			int space = target.indexOf(" ");
 			element = element.replace(space, space + 1, "0");
 		}
-		
 		return element.toString();
 	}
 	
@@ -86,7 +82,7 @@ public class EventTime implements CurrentTime {
 	public String getTimeValue() {
 		String h = String.format("%d", hour);
 		String m = String.format("%d", minute);
-		//add 0 if the value is a single digit
+		// add 0 if the value is a single digit
 		if(hour < 10) {
 			h = String.format("0%d", hour);
 		}
